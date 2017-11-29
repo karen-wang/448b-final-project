@@ -25,13 +25,13 @@
     "cs 231b", "cs 231m", "cs 331a",
       "cs 262", "cs 279", "cs 371", "cs 374",
     "cs 276", "cs 224w", "cs 227b", "cs 277", "cs 379",
-    "cs 327a", "cs 329", "engr 205", "ee 209", "mse 251",
-    "mse 351"]
+    "cs 327a", "cs 329", "engr 205", "ee 209", "ms&e 251",
+    "ms&e 351"]
   },
     {
     "name": "ai.track_electives",
     "courses": ["cs 238", "cs 275", "cs 326", "cs 334a-or-ee 364a", "cs 428",
-    "ee 278", "ee 364b", "econ 286", "mse 252", "mse 352", "mse 355",
+    "ee 278", "ee 364b", "econ 286", "ms&e 252", "ms&e 352", "ms&e 355",
     "phil 152", "psych 202", "psych 204a", "psych 204b", "psych 209",
     "stats 200", "stats 202", "stats 205"]
   },
