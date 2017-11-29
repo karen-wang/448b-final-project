@@ -52,5 +52,27 @@
     {
     "name": "biocomp.restricted_elective.3",
     "courses": ["cs 108", "cs 124", "cs 131", "cs 140-or-cs 140e", "cs 142", "cs 143", "cs 144", "cs 145", "cs 147", "cs 148", "cs 149", "cs 154", "cs 155", "cs 157-or-phil 151", "cs 164", "cs 166", "cs 167", "cs 168", "cs 190", "cs 205a", "cs 205b", "cs 210a", "cs 221", "cs 223a", "cs 224n", "cs 224s", "cs 224u", "cs 224w", "cs 225a", "cs 227b", "cs 228", "cs 229", "cs 229t", "cs 231a", "cs 231b", "cs 231m", "cs 231n", "cs 232", "cs 233", "cs 234", "cs 238", "cs 240", "cs 240h", "cs 242", "cs 243", "cs 244", "cs 244b", "cs 245", "cs 246", "cs 247", "cs 248", "cs 249a", "cs 251", "cs 254", "cs 255", "cs 261", "cs 262", "cs 263", "cs 264", "cs 265", "cs 266", "cs 267", "cs 269i", "cs 270", "cs 272", "cs 273a", "cs 273b", "cs 274", "cs 275", "cs 276", "cs 279", "cs 348b", "cs 348c", "cs 371", "cs 374", "cme 108", "ee 180", "ee 263", "ee 282", "ee 364a", "bioe 101", "ms&e 152", "ms&e 252", "stats 206", "stats 315a", "stats 315b", "bmi 231", "bmi 260", "gene 211"]
-  }
+  }, {
+  "name" : "compeng.b",
+  "courses": ["ee 101a", "ee 101b", "ee 102a", "ee 102b"]
+  }, {
+  "name": "compeng.conc.1.req",
+  "courses": ["cs 140-or-cs 140e-or-cs 143", "ee 109", "ee 271"]
+}, {
+  "name": "compeng.conc.1.choose",
+  "courses": ["cs 140-or-cs 140e-or-cs 143", "cs 144", "cs 149", "cs 190", "cs 240e", "cs 244", "ee 273", "ee 282"]
+}, {
+  "name": "compeng.conc.2.req",
+  "courses": ["cs 205a", "cs 223a", "me 210", "engr 105"]
+}, {
+  "name": "compeng.conc.2.choose",
+  "courses": ["cs 225a", "cs 231a", "engr 205", "engr 207b"]
+}, {
+  "name": "compeng.conc.3.req",
+  "courses": ["cs 140-or-cs 140e", "cs 144"]
+}, {
+  "name": "compeng.conc.3.choose",
+  "courses": ["cs 240", "cs 240e", "cs 241", "cs 244", "cs 244b", "cs 244e", "ee 179"]
+}
+
 ]

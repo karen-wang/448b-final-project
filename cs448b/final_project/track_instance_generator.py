@@ -3,13 +3,13 @@ from pprint import pprint
 import random
 from collections import Counter
 
-NUM_INSTANCES = 100
+NUM_INSTANCES = 1000
 OR_DELIM = '-or-'
 
 def generate_AI_track_instances(d):
     counter = Counter()
     b_keys = [k for k, v in d.items() if k.startswith('ai.b')]
-    print(b_keys)
+    #print(b_keys)
     for _ in range(NUM_INSTANCES):
         track_instance = []
         # A requirements
@@ -39,7 +39,43 @@ def generate_AI_track_instances(d):
         #pprint(track_instance)
         counter.update(track_instance)
 
-    pprint(counter)
+    #pprint(counter)
+    return counter
+
+def generate_compeng_track_instances(d):
+    counter = Counter()
+    for _ in range(NUM_INSTANCES):
+        track_instance = []
+        courses = random.sample(d["compeng.b"], 2)
+        track_instance += courses
+        concentration = random.randint(1, 3)
+        if concentration == 1:
+            trio = ["cs 140", "cs 140e", "cs 143"]
+            track_instance.append(random.choice(trio))
+            track_instance.append("ee 109")
+            track_instance.append("ee 271")
+
+            courses = random.sample(d["compeng.conc.1.choose"], 2)
+            for course in courses:
+                if OR_DELIM in course:
+                    options = course.split(OR_DELIM)
+                    options = list(set(options) - set(track_instance))
+                    course = random.choice(options)
+                track_instance.append(course)
+        elif concentration == 2:
+            track_instance += d["compeng.conc.2.req"]
+            track_instance.append(random.choice(d["compeng.conc.2.choose"]))
+        elif concentration == 3:
+            duo = ["cs 140", "cs 140e"]
+            track_instance.append(random.choice(duo))
+            track_instance.append("cs 144")
+            track_instance += random.sample(d["compeng.conc.3.choose"], 3)
+
+        #pprint(track_instance)
+        counter.update(track_instance)
+
+    #pprint(counter)
+    return counter
 
 def load_data():
     dict = {}
@@ -55,6 +91,8 @@ def load_data():
 
 def main():
     dict = load_data()
-    generate_AI_track_instances(dict)
+    c1 = generate_AI_track_instances(dict)
+    c2 = generate_compeng_track_instances(dict)
+    pprint(c1 & c2)
 
 main()
