@@ -133,8 +133,10 @@ def get_scores_for_course(course):
 
     #normalized_appearances = [round(x/float(sum(appearances)+.0001),3) for x in appearances]        
     normalized_appearances = [round(100*x/float(NUM_INSTANCES),3) for x in appearances]
-    print {course: appearances}
-    return {course: normalized_appearances}
+    #print {course: appearances}
+    print {course: normalized_appearances}
+    return {"name": course,
+            "count": appearances}
 
 def main():
     global all_sampled_tracks
@@ -154,7 +156,14 @@ def main():
     all_sampled_tracks["systems"] = c4
     all_sampled_tracks["info"] = c5
 
+    data = []
     for course in all_courses:
-        get_scores_for_course(course)
+        output = get_scores_for_course(course)
+        pprint(output)
+        data.append(output)
+    pprint(data)
+
+    with open('out.json', 'w') as outfile:
+        json.dump(data, outfile)
 
 main()

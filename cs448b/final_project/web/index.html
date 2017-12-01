@@ -56,6 +56,7 @@ body {
 
 <script src="http://d3js.org/d3.v3.js"></script>
 <script src="https://rawgit.com/tpreusse/radar-chart-d3/master/src/radar-chart.js"></script>
+<script src="track_instance_generator.js"></script>
 
 <script>
 RadarChart.defaultConfig.color = function() {};
@@ -184,6 +185,12 @@ function randomDataset() {
     };
   });
 }
+
+function trackDataset() {
+  let myData = JSON.parse(out);
+  console.log(myData);
+}
+
 </script>
 
 <script>
