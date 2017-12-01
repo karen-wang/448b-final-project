@@ -6,6 +6,8 @@ from collections import Counter
 NUM_INSTANCES = 5000
 OR_DELIM = '-or-'
 
+tracknames = ["AI", "compeng", "theory", "systems", "info"]
+
 def generate_AI_track_instances(d):
     counter = Counter()
     b_keys = [k for k, v in d.items() if k.startswith('ai.b')]
@@ -107,6 +109,8 @@ def generate_info_track_instances(d):
     return counter
 
 def load_data():
+    global all_courses
+    all_courses = []
     dict = {}
     buckets = json.load(open('requirements.json'))
     for bucket in buckets:
@@ -115,8 +119,10 @@ def load_data():
             return
         courses = [x.encode('utf-8') for x in bucket["courses"]]
         dict[bucket["name"].encode('utf-8')] = courses
+        all_courses += courses
         if "quantity" in bucket:
             dict[bucket["name"]+".quantity"] = bucket["quantity"]
+    all_courses = list(set(all_courses))
     #pprint(dict)
     return dict
 
@@ -124,13 +130,15 @@ def get_scores_for_course(course):
     appearances = []
     for track in tracknames:
         appearances.append(all_sampled_tracks[track][course])
-    normalized_appearances = [round(x/float(sum(appearances)),3) for x in appearances]        
+
+    #normalized_appearances = [round(x/float(sum(appearances)+.0001),3) for x in appearances]        
+    normalized_appearances = [round(100*x/float(NUM_INSTANCES),3) for x in appearances]
+    print {course: appearances}
     return {course: normalized_appearances}
 
 def main():
+    global all_sampled_tracks
     dict = load_data()
-    global c1, c2, c3, c4, c5, tracknames, all_sampled_tracks
-    tracknames = ["AI", "compeng", "theory", "systems", "info"]
     c1 = generate_AI_track_instances(dict)
     c2 = generate_compeng_track_instances(dict)
     pprint(c1 & c2)
@@ -146,7 +154,7 @@ def main():
     all_sampled_tracks["systems"] = c4
     all_sampled_tracks["info"] = c5
 
-    print get_scores_for_course("cs 140")
-    print get_scores_for_course("cs 228")
+    for course in all_courses:
+        get_scores_for_course(course)
 
 main()
