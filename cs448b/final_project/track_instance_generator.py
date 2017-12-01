@@ -77,7 +77,17 @@ def generate_compeng_track_instances(d):
     #pprint(counter)
     return counter
 
-
+def generate_theory_systems_track_instances(d, track_name):
+    counter = Counter()
+    requirements = [".a", ".b", ".c", ".track_electives"]
+    for _ in range(NUM_INSTANCES):
+        track_instance = []
+        for r in requirements:
+            req = track_name + r
+            options = set(d[req]) - set(track_instance)
+            track_instance += random.sample(options, d[req+'.quantity'])
+        counter.update(track_instance)
+    return counter
 
 def load_data():
     dict = {}
@@ -88,6 +98,8 @@ def load_data():
             return
         courses = [x.encode('utf-8') for x in bucket["courses"]]
         dict[bucket["name"].encode('utf-8')] = courses
+        if "quantity" in bucket:
+            dict[bucket["name"]+".quantity"] = bucket["quantity"]
     #pprint(dict)
     return dict
 
@@ -96,5 +108,8 @@ def main():
     c1 = generate_AI_track_instances(dict)
     c2 = generate_compeng_track_instances(dict)
     pprint(c1 & c2)
+    c3 = generate_theory_systems_track_instances(dict, "theory")
+    c4 = generate_theory_systems_track_instances(dict, "systems")
+    pprint(c4)
 
 main()
