@@ -85,7 +85,24 @@ def generate_theory_systems_track_instances(d, track_name):
         for r in requirements:
             req = track_name + r
             options = set(d[req]) - set(track_instance)
-            track_instance += random.sample(options, d[req+'.quantity'])
+            track_instance += random.sample(options, d[req+".quantity"])
+        counter.update(track_instance)
+    return counter
+
+def generate_info_track_instances(d):
+    counter = Counter()
+    for _ in range(NUM_INSTANCES):
+        track_instance = []
+        #A
+        track_instance += random.sample(set(d["info.a"]), d["info.a.quantity"])
+        #B
+        b_areas = random.sample(["i", "ii", "iii", "iv"], 2)
+        for area in b_areas:
+            options = set(d["info.b."+area]) - set(track_instance)
+            track_instance += random.sample(options, d["info.b."+area+".quantity"])
+        #elective
+        options = set(d["info.track_electives"]) - set(track_instance)
+        track_instance += random.sample(options, d["info.track_electives.quantity"])
         counter.update(track_instance)
     return counter
 
@@ -110,6 +127,7 @@ def main():
     pprint(c1 & c2)
     c3 = generate_theory_systems_track_instances(dict, "theory")
     c4 = generate_theory_systems_track_instances(dict, "systems")
-    pprint(c4)
+    c5 = generate_info_track_instances(dict)
+    pprint(c5)
 
 main()
