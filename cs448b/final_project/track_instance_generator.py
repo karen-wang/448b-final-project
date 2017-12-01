@@ -36,7 +36,7 @@ def generate_AI_track_instances(d):
                 options = course.split(OR_DELIM)
                 course = random.choice(options)
             track_instance.append(course)
-        #pprint(track_instance)
+        pprint(track_instance)
         counter.update(track_instance)
 
     #pprint(counter)
