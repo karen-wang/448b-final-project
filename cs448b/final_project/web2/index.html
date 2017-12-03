@@ -25,8 +25,16 @@
 
     <!-- visualization -->
     <div class="visualization col-xs-7">
-      <p>Select example:
-        <select ng-options="example for example in radar.examples" ng-model="radar.exampleSelected" ng-change="radar.selectExample(radar.exampleSelected)"></select>
+      <!--<p>Select example:-->
+        <!--<select ng-options="example for example in radar.examples" ng-model="radar.exampleSelected" ng-change="radar.selectExample(radar.exampleSelected)"></select>-->
+      <!--</p>-->
+      <p>
+        <label>Search: <input ng-model="radar.searchText"></label>
+          <ul>
+          <li ng-repeat="c in radar.allClasses | filter : radar.searchText">
+          {{ c }}
+          </li>
+        </ul>
       </p>
       <div class="visualization">
         <radar csv="radar.csv" config="radar.config"></radar>
@@ -110,10 +118,10 @@
 
 
   <!-- data/file preview -->
-  <div class="preview">
-    <h2>Data</h2>
-    <pre>{{ radar.csv }}</pre>
-  </div>
+  <!--<div class="preview">-->
+    <!--<h2>Data</h2>-->
+    <!--<pre>{{ radar.csv }}</pre>-->
+  <!--</div>-->
 
 
   <!-- footer -->
