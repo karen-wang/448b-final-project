@@ -7,6 +7,7 @@ import numpy as np
 from numpy import linalg
 import scipy as sp
 from scipy import spatial
+import csv
 
 NUM_INSTANCES = 5000
 OR_DELIM = '-or-'
@@ -140,7 +141,7 @@ def load_data():
         if "quantity" in bucket:
             dict[bucket["name"]+".quantity"] = bucket["quantity"]
     all_courses = sorted(list(set(all_courses)))
-    #pprint(dict)
+    # pprint(all_courses)
     return dict, all_courses
 
 def get_scores_for_course(course):
@@ -150,7 +151,7 @@ def get_scores_for_course(course):
 
     #normalized_appearances = [round(x/float(sum(appearances)+.0001),3) for x in appearances]        
     normalized_appearances = [round(100*x/float(NUM_INSTANCES),3) for x in appearances]
-    #print {course: appearances}
+    print {course: appearances}
     print {course: normalized_appearances}
     return {"name": course,
             "count": appearances}
@@ -160,10 +161,12 @@ def get_scores_for_course(course):
     # output length is 149 (for all classes)
     # sum is 7 (number of classes/track) * NUM_SAMPLES 
 def convert_track_to_vector(track, all_courses): 
-    all_courses = sorted(all_courses, reverse=True)
+    all_courses = sorted(all_courses, reverse=True) # Z to A
+    # pprint(all_courses)
     track_vec = []
     for course in all_courses:
         track_vec.append(track[course])
+    pprint(track_vec)
     return track_vec
 
 #http://dataaspirant.com/2015/04/11/five-most-popular-similarity-measures-implementation-in-python/
@@ -199,6 +202,14 @@ def print_dists_sorted(dists):
     for (v, k) in dists_view:
         print '%s: %.4f' % (k, v)
 
+def outputCSV():
+    with open('out.csv', 'wb') as csvfile:
+        writer = csv.writer(csvfile, delimiter=',')
+        for course in all_courses:
+            output = get_scores_for_course(course)
+            # writer.writerow(output)
+
+
 def main():
     global all_sampled_tracks
     dict, all_courses = load_data()
@@ -212,7 +223,6 @@ def main():
     c4 = generate_theory_systems_track_instances(dict, "systems")
     c5 = generate_info_track_instances(dict)
     # pprint(c5)
-    
 
 
     all_sampled_tracks = {}
@@ -222,18 +232,19 @@ def main():
     all_sampled_tracks["systems"] = convert_track_to_vector(c4, all_courses)
     all_sampled_tracks["info"] = convert_track_to_vector(c5, all_courses)
 
+    #pprint(all_sampled_tracks)
+
     dists = get_all_track_distances(all_sampled_tracks)
     print_dists_sorted(dists)
-    
 
-    # data = []
-    # for course in all_courses:
-    #     output = get_scores_for_course(course)
-    #     pprint(output)
-    #     data.append(output)
-    # pprint(data)
+    data = []
+    for course in all_courses:
+        output = get_scores_for_course(course)
+        pprint(output)
+        data.append(output)
+    pprint(data)
 
-    # with open('out.json', 'w') as outfile:
-    #     json.dump(data, outfile)
+    with open('out.json', 'w') as outfile:
+        json.dump(data, outfile)
 
 main()
