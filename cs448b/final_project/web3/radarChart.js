@@ -1,19 +1,11 @@
-//Practically all this code comes from https://github.com/alangrafu/radar-chart-d3
-//I only made some additions and aesthetic adjustments to make the chart look better
-//(of course, that is only my point of view)
-//Such as a better placement of the titles at each line end,
-//adding numbers that reflect what each circular level stands for
-//Not placing the last level and slight differences in color
-//
-//For a bit of extra information check the blog about it:
-//http://nbremer.blogspot.nl/2013/09/making-d3-radar-chart-look-bit-better.html
+
 
 var RadarChart = {
   draw: function(id, d, options){
   var cfg = {
 	 radius: 5,
-	 w: 600,
-	 h: 600,
+	 w: 800,
+	 h: 800,
 	 factor: 1,
 	 factorLegend: .85,
 	 levels: 3,
@@ -25,7 +17,8 @@ var RadarChart = {
 	 TranslateY: 30,
 	 ExtraWidthX: 100,
 	 ExtraWidthY: 100,
-	 color: d3.scale.category10()
+	 color: d3.scale.category10(),
+	  classIdx: 0,
 	};
 
 	if('undefined' !== typeof options){
@@ -108,7 +101,7 @@ var RadarChart = {
 		.attr("class", "legend")
 		.text(function(d){return d})
 		.style("font-family", "sans-serif")
-		.style("font-size", "11px")
+		.style("font-size", "1em")
 		.attr("text-anchor", "middle")
 		.attr("dy", "1.5em")
 		.attr("transform", function(d, i){return "translate(0, -10)"})
@@ -117,12 +110,12 @@ var RadarChart = {
 
 
 	d.forEach(function(y, x){
-		if (x != 0) return;
+		if (x != cfg.classIdx) return;
 		//console.log(y);
 	  dataValues = [];
 	  g.selectAll(".nodes")
 		.data(y, function(j, i){
-			  console.log(j, i);
+			  //console.log(j, i);
 		  dataValues.push([
 			cfg.w/2*(1-(parseFloat(Math.max(j.value, 0))/cfg.maxValue)*cfg.factor*Math.sin(i*cfg.radians/total)),
 			cfg.h/2*(1-(parseFloat(Math.max(j.value, 0))/cfg.maxValue)*cfg.factor*Math.cos(i*cfg.radians/total))
@@ -165,7 +158,7 @@ var RadarChart = {
 
 
 	d.forEach(function(y, x){
-		if (x != 0) return;
+		if (x != cfg.classIdx) return;
 	  g.selectAll(".nodes")
 		.data(y).enter()
 		.append("svg:circle")
@@ -191,7 +184,7 @@ var RadarChart = {
 					tooltip
 						.attr('x', newX)
 						.attr('y', newY)
-						.text(Format(d.value))
+						.text(Format(d.value) + ' of all instances of this track include this class')
 						.transition(200)
 						.style('opacity', 1);
 
@@ -222,6 +215,4 @@ var RadarChart = {
 			   .style('font-family', 'sans-serif')
 			   .style('font-size', '13px');
   }
-};/**
- * Created by kywang on 12/1/17.
- */
+};

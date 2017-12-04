@@ -7,11 +7,12 @@ import numpy as np
 from numpy import linalg
 import scipy as sp
 from scipy import spatial
+import csv
 
 NUM_INSTANCES = 5000
 OR_DELIM = '-or-'
 
-tracknames = ["AI", "compeng", "theory", "systems", "info"]
+tracknames = ["AI", "compeng", "info", "theory", "systems"]
 
 def generate_AI_track_instances(d):
     counter = Counter()
@@ -140,30 +141,33 @@ def load_data():
         if "quantity" in bucket:
             dict[bucket["name"]+".quantity"] = bucket["quantity"]
     all_courses = sorted(list(set(all_courses)))
-    #pprint(dict)
+    # pprint(all_courses)
     return dict, all_courses
 
 def get_scores_for_course(course):
     appearances = []
+    # pprint(tracknames)
     for track in tracknames:
         appearances.append(all_sampled_tracks[track][course])
 
     #normalized_appearances = [round(x/float(sum(appearances)+.0001),3) for x in appearances]        
     normalized_appearances = [round(100*x/float(NUM_INSTANCES),3) for x in appearances]
-    #print {course: appearances}
+    # print {course: appearances}
     print {course: normalized_appearances}
     return {"name": course,
-            "count": appearances}
+            "count": normalized_appearances}
 
 
 # Note: all vectors have sum and length.
     # output length is 149 (for all classes)
     # sum is 7 (number of classes/track) * NUM_SAMPLES 
 def convert_track_to_vector(track, all_courses): 
-    all_courses = sorted(all_courses, reverse=True)
+    all_courses = sorted(all_courses, reverse=True) # Z to A
+    # pprint(all_courses)
     track_vec = []
     for course in all_courses:
         track_vec.append(track[course])
+    # pprint(track_vec)
     return track_vec
 
 #http://dataaspirant.com/2015/04/11/five-most-popular-similarity-measures-implementation-in-python/
@@ -199,6 +203,38 @@ def print_dists_sorted(dists):
     for (v, k) in dists_view:
         print '%s: %.4f' % (k, v)
 
+def outputCSV():
+    with open('out.csv', 'wb') as csvfile:
+        writer = csv.writer(csvfile, delimiter=',')
+        writer.writerow(['deptCode','classNo',
+                         'scoreAI','scoreCompeng',
+                         'scoreInfo','scoreSystems',
+                         'scoreTheory'])
+        for course in all_courses:
+            output = get_scores_for_course(course)
+            # print(output)
+            dept_code_class_no = output['name'].split()
+            dept_code = dept_code_class_no[0]
+            class_no = dept_code_class_no[1]
+            track_scores = output['count']
+            score_ai = track_scores[tracknames.index('AI')]
+            score_compeng = track_scores[tracknames.index('compeng')]
+            score_info = track_scores[tracknames.index('info')]
+            score_systems = track_scores[tracknames.index('systems')]
+            score_theory = track_scores[tracknames.index('theory')]
+            writer.writerow([dept_code, class_no, score_ai, score_compeng, score_info, score_systems, score_theory])
+
+def outputJSON():
+    data = []
+    for course in all_courses:
+        output = get_scores_for_course(course)
+        # pprint(output)
+        data.append(output)
+    # pprint(data)
+
+    with open('out.json', 'w') as outfile:
+        json.dump(data, outfile)
+
 def main():
     global all_sampled_tracks
     dict, all_courses = load_data()
@@ -212,7 +248,6 @@ def main():
     c4 = generate_theory_systems_track_instances(dict, "systems")
     c5 = generate_info_track_instances(dict)
     # pprint(c5)
-    
 
     all_sampled_tracks = {}
     all_sampled_tracks["AI"] = c1
@@ -223,7 +258,6 @@ def main():
 
    
     data = []
-
     for course in all_courses:
         output = get_scores_for_course(course)
         pprint(output)
@@ -239,11 +273,7 @@ def main():
 
     dists = get_all_track_distances(classes_by_track)
     print_dists_sorted(dists)
-    
 
-    
-
-    with open('out.json', 'w') as outfile:
-        json.dump(data, outfile)
+    outputCSV()
 
 main()

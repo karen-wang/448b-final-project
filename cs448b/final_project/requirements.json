@@ -191,7 +191,7 @@
 }, {
   "name": "graphics.c",
   "quantity": 2,
-  "courses": ["cs 178", "cs 131-or-231a ", "cs233", "cs 268", 
+  "courses": ["cs 178", "cs 131-or-231a ", "cs 233", "cs 268",
     "cs 348a", "cs 348b", "cs 348c", "cs 448"]
 }, {
   "name": "graphics.track_electives",
