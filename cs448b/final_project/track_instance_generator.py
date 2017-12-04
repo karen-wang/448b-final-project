@@ -224,17 +224,29 @@ def main():
     c5 = generate_info_track_instances(dict)
     # pprint(c5)
 
-
     all_sampled_tracks = {}
-    all_sampled_tracks["AI"] = convert_track_to_vector(c1, all_courses)
-    all_sampled_tracks["compeng"] = convert_track_to_vector(c2, all_courses)
-    all_sampled_tracks["theory"] = convert_track_to_vector(c3, all_courses)
-    all_sampled_tracks["systems"] = convert_track_to_vector(c4, all_courses)
-    all_sampled_tracks["info"] = convert_track_to_vector(c5, all_courses)
+    all_sampled_tracks["AI"] = c1
+    all_sampled_tracks["compeng"] = c2
+    all_sampled_tracks["theory"] = c3
+    all_sampled_tracks["systems"] = c4
+    all_sampled_tracks["info"] = c5
 
-    #pprint(all_sampled_tracks)
+   
+    data = []
+    for course in all_courses:
+        output = get_scores_for_course(course)
+        pprint(output)
+        data.append(output)
+    pprint(data)
 
-    dists = get_all_track_distances(all_sampled_tracks)
+    classes_by_track = {}
+    classes_by_track["AI"] = convert_track_to_vector(c1, all_courses)
+    classes_by_track["compeng"] = convert_track_to_vector(c2, all_courses)
+    classes_by_track["theory"] = convert_track_to_vector(c3, all_courses)
+    classes_by_track["systems"] = convert_track_to_vector(c4, all_courses)
+    classes_by_track["info"] = convert_track_to_vector(c5, all_courses)
+
+    dists = get_all_track_distances(classes_by_track)
     print_dists_sorted(dists)
 
     data = []
