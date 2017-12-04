@@ -93,6 +93,11 @@ def generate_theory_systems_track_instances(d, track_name):
             req = track_name + r
             options = set(d[req]) - set(track_instance)
             track_instance += random.sample(options, d[req+".quantity"])
+        for i, course in enumerate(track_instance):
+            if OR_DELIM in course:
+                options = course.split(OR_DELIM)
+                new_c = random.choice(options)
+                track_instance[i] = new_c
         counter.update(track_instance)
     return counter
 
@@ -110,6 +115,13 @@ def generate_info_track_instances(d):
         #elective
         options = set(d["info.track_electives"]) - set(track_instance)
         track_instance += random.sample(options, d["info.track_electives.quantity"])
+        
+        for i, course in enumerate(track_instance):
+            if OR_DELIM in course:
+                options = course.split(OR_DELIM)
+                new_c = random.choice(options)
+                track_instance[i] = new_c
+
         counter.update(track_instance)
     return counter
 
@@ -154,6 +166,7 @@ def convert_track_to_vector(track, all_courses):
         track_vec.append(track[course])
     return track_vec
 
+#http://dataaspirant.com/2015/04/11/five-most-popular-similarity-measures-implementation-in-python/
 def get_track_distance(track1, track2):
     t1 = np.array(track1)
     t2 = np.array(track2)
@@ -195,6 +208,7 @@ def main():
     ce2 = generate_compeng_track_instances(dict)
     # pprint(c1 & c2)
     c3 = generate_theory_systems_track_instances(dict, "theory")
+
     c4 = generate_theory_systems_track_instances(dict, "systems")
     c5 = generate_info_track_instances(dict)
     # pprint(c5)
