@@ -195,7 +195,7 @@
     "cs 348a", "cs 348b", "cs 348c", "cs 448"]
 }, {
   "name": "graphics.track_electives",
-  "quantity": 3,
+  "quantity": 2,
   "courses": ["artstudi 160", "artstudi 170", "artstudi 179", "cme 302", 
     "cme 306", "ee 262", "ee 264", "ee 278", "ee 368", "me 101", "psych 30", "psych 221",
     "cs 131", "cs 140" ,"cs 140e", "cs 142", "cs 143", "cs 144", "cs 145", 
@@ -219,8 +219,8 @@
   "quantity": 3,
   "courses": ["cs 142", "cs 148", "cs 194h", "cs 210a", "cs 376", "cs 377", "cs 448b", "me 216m"]
 }, {
-  "name": "hci.track_electives",
-  "quantity": 3,
+  "name": "hci.c",
+  "quantity": 2,
   "courses": ["comm 121", "comm 124/224", "comm 140", "comm 240", "comm 166", "comm 169", "comm 269", 
     "comm 172", "comm 272", "comm 182", "comm 324", "artstudi 160", "artstudi 162", 
     "artstudi 163", "artstudi 164", "artstudi 165", "artstudi 168", "artstudi 264", 
@@ -242,14 +242,4 @@
     "ee 282", "ee 364a", "cme 108", "ee 180", "cs 221"
   ]
 }
-
-
 ]
-
-
-
-
-
-
-
-
