@@ -2,6 +2,11 @@ import json
 from pprint import pprint
 import random
 from collections import Counter
+import math
+import numpy as np
+from numpy import linalg
+import scipy as sp
+from scipy import spatial
 
 NUM_INSTANCES = 5000
 OR_DELIM = '-or-'
@@ -38,7 +43,7 @@ def generate_AI_track_instances(d):
                 options = course.split(OR_DELIM)
                 course = random.choice(options)
             track_instance.append(course)
-        pprint(track_instance)
+        #pprint(track_instance)
         counter.update(track_instance)
 
     #pprint(counter)
@@ -122,9 +127,9 @@ def load_data():
         all_courses += courses
         if "quantity" in bucket:
             dict[bucket["name"]+".quantity"] = bucket["quantity"]
-    all_courses = list(set(all_courses))
+    all_courses = sorted(list(set(all_courses)))
     #pprint(dict)
-    return dict
+    return dict, all_courses
 
 def get_scores_for_course(course):
     appearances = []
@@ -138,32 +143,83 @@ def get_scores_for_course(course):
     return {"name": course,
             "count": appearances}
 
+
+# Note: all vectors have sum and length.
+    # output length is 149 (for all classes)
+    # sum is 7 (number of classes/track) * NUM_SAMPLES 
+def convert_track_to_vector(track, all_courses): 
+    all_courses = sorted(all_courses, reverse=True)
+    track_vec = []
+    for course in all_courses:
+        track_vec.append(track[course])
+    return track_vec
+
+def get_track_distance(track1, track2):
+    t1 = np.array(track1)
+    t2 = np.array(track2)
+
+    # Euclidean distance
+    euc_dist = np.linalg.norm(t1-t2)
+
+    # Cosine similarity
+    cos_dist = round(1 - sp.spatial.distance.cosine(t1, t2), 4)
+
+    #Manhattan distance
+    manh_dist = sp.spatial.distance.cityblock(t1, t2)
+    
+    return cos_dist
+
+def get_all_track_distances(tracks):
+
+    tracknames = tracks.keys()
+    dist_dict = {}
+    for i in range(len(tracknames)):
+        for j in range(i+1, len(tracknames)):
+            t1 = tracknames[i]
+            t2 = tracknames[j]
+            dist_dict[t1+ ' and ' +t2] = get_track_distance(tracks[t1], tracks[t2])
+    return dist_dict
+
+def print_dists_sorted(dists):
+    dists_view = [ (v, k) for k, v in dists.iteritems() ]
+    dists_view.sort(reverse=True)
+    for (v, k) in dists_view:
+        print '%s: %.4f' % (k, v)
+
 def main():
     global all_sampled_tracks
-    dict = load_data()
+    dict, all_courses = load_data()
     c1 = generate_AI_track_instances(dict)
+    ai2 = generate_AI_track_instances(dict)
     c2 = generate_compeng_track_instances(dict)
-    pprint(c1 & c2)
+    ce2 = generate_compeng_track_instances(dict)
+    # pprint(c1 & c2)
     c3 = generate_theory_systems_track_instances(dict, "theory")
     c4 = generate_theory_systems_track_instances(dict, "systems")
     c5 = generate_info_track_instances(dict)
-    pprint(c5)
+    # pprint(c5)
     
+
+
     all_sampled_tracks = {}
-    all_sampled_tracks["AI"] = c1
-    all_sampled_tracks["compeng"] = c2
-    all_sampled_tracks["theory"] = c3
-    all_sampled_tracks["systems"] = c4
-    all_sampled_tracks["info"] = c5
+    all_sampled_tracks["AI"] = convert_track_to_vector(c1, all_courses)
+    all_sampled_tracks["compeng"] = convert_track_to_vector(c2, all_courses)
+    all_sampled_tracks["theory"] = convert_track_to_vector(c3, all_courses)
+    all_sampled_tracks["systems"] = convert_track_to_vector(c4, all_courses)
+    all_sampled_tracks["info"] = convert_track_to_vector(c5, all_courses)
 
-    data = []
-    for course in all_courses:
-        output = get_scores_for_course(course)
-        pprint(output)
-        data.append(output)
-    pprint(data)
+    dists = get_all_track_distances(all_sampled_tracks)
+    print_dists_sorted(dists)
+    
 
-    with open('out.json', 'w') as outfile:
-        json.dump(data, outfile)
+    # data = []
+    # for course in all_courses:
+    #     output = get_scores_for_course(course)
+    #     pprint(output)
+    #     data.append(output)
+    # pprint(data)
+
+    # with open('out.json', 'w') as outfile:
+    #     json.dump(data, outfile)
 
 main()
