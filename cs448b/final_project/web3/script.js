@@ -29,29 +29,66 @@ var d = [
 		  ]
 		];
 
-//Options for the Radar chart, other than default
-var mycfg = {
-  w: w,
-  h: h,
-  maxValue: 0.6,
-  levels: 6,
-  ExtraWidthX: 300
+// Load data from CSV
+d3.csv('test.csv', parseInputRow, loadData);
+
+function parseInputRow(d) {
+    // return {
+    //     deptCode: d.deptCode,
+    //     classNo: d.classNo,
+    //     scoreAI: d.scoreAI,
+    //     scoreBiocomp: d.scoreBiocomp,
+    //     scoreCompeng: d.scoreCompeng,
+    //     scoreGraphics: d.scoreGraphics,
+    //     scoreHCI: d.scoreHCI,
+    //     scoreInfo: d.scoreInfo,
+    //     scoreSystems: d.scoreSystems,
+    //     scoreTheory: d.scoreTheory,
+    // };
+    return [
+		{axis:"AI", value: d.scoreAI},
+        {axis:"Biocomputation", value: d.scoreBiocomp},
+        {axis:"Computer Engineering", value: d.scoreCompeng},
+        {axis:"Graphics", value: d.scoreGraphics},
+        {axis:"HCI", value: d.scoreHCI},
+        {axis:"Info", value: d.scoreInfo},
+        {axis:"Systems", value: d.scoreSystems},
+        {axis:"Theory", value: d.scoreTheory},
+    ];
 }
 
-//Call function to draw the Radar chart
-//Will expect that data is in %'s
-RadarChart.draw("#chart", d, mycfg);
+function loadData(error, data) {
+    if (error) {
+    	console.log(error);
+        throw error; // Runs if there's a problem fetching the csv.
+	}
+	console.log(data);
 
-$( function() {
-    var availableClasses = [
-      "cs 221",
-		"cs 147",
-		"cs 448b"
-    ];
-    $( "#classes" ).autocomplete({
-      source: availableClasses
-    });
-  } );
+    //Options for the Radar chart, other than default
+    var mycfg = {
+        w: w,
+        h: h,
+        maxValue: 0.6,
+        levels: 6,
+        ExtraWidthX: 300
+    }
+
+    //Call function to draw the Radar chart
+	//Will expect that data is in %'s
+    RadarChart.draw("#chart", data, mycfg);
+
+    $( function() {
+        var availableClasses = [
+            "cs 221",
+            "cs 147",
+            "cs 448b"
+        ];
+        $( "#classes" ).autocomplete({
+            source: availableClasses
+        });
+    } );
+}
+
 
 ////////////////////////////////////////////
 /////////// Initiate legend ////////////////

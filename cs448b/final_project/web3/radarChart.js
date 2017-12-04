@@ -1,12 +1,4 @@
-//Practically all this code comes from https://github.com/alangrafu/radar-chart-d3
-//I only made some additions and aesthetic adjustments to make the chart look better
-//(of course, that is only my point of view)
-//Such as a better placement of the titles at each line end,
-//adding numbers that reflect what each circular level stands for
-//Not placing the last level and slight differences in color
-//
-//For a bit of extra information check the blog about it:
-//http://nbremer.blogspot.nl/2013/09/making-d3-radar-chart-look-bit-better.html
+
 
 var RadarChart = {
   draw: function(id, d, options){
@@ -117,12 +109,12 @@ var RadarChart = {
 
 
 	d.forEach(function(y, x){
-		if (x != 0) return;
+		//if (x != 0) return;
 		//console.log(y);
 	  dataValues = [];
 	  g.selectAll(".nodes")
 		.data(y, function(j, i){
-			  console.log(j, i);
+			  //console.log(j, i);
 		  dataValues.push([
 			cfg.w/2*(1-(parseFloat(Math.max(j.value, 0))/cfg.maxValue)*cfg.factor*Math.sin(i*cfg.radians/total)),
 			cfg.h/2*(1-(parseFloat(Math.max(j.value, 0))/cfg.maxValue)*cfg.factor*Math.cos(i*cfg.radians/total))
@@ -165,7 +157,7 @@ var RadarChart = {
 
 
 	d.forEach(function(y, x){
-		if (x != 0) return;
+		//if (x != 0) return;
 	  g.selectAll(".nodes")
 		.data(y).enter()
 		.append("svg:circle")
@@ -222,6 +214,4 @@ var RadarChart = {
 			   .style('font-family', 'sans-serif')
 			   .style('font-size', '13px');
   }
-};/**
- * Created by kywang on 12/1/17.
- */
+};
