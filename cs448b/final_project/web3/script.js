@@ -32,12 +32,14 @@ var d = [
 var allData;
 var orderedClasses = [];
 var selectedClassIndices = [];
+var dataToDisplay = [];
 
 // Load data from CSV
 d3.csv('out.csv', parseInputRow, loadData);
 
 function parseInputRow(d) {
-    orderedClasses.push(d.deptCode + ' ' + d.classNo);
+    let courseName = d.deptCode + ' ' + d.classNo;
+    orderedClasses.push(courseName);
     return [
 		{axis:"AI", value: +d.scoreAI/100.0},
         // {axis:"Biocomputation", value: d.scoreBiocomp},
@@ -74,6 +76,18 @@ function loadData(error, data) {
 
 	allData = data;
 
+	selectedClassIndices.push(orderedClasses.indexOf('cs 124'));
+	addClassWidget(orderedClasses.indexOf('cs 124'));
+
+    for (var i = 0; i < allData.length; i++) {
+        if (selectedClassIndices.includes(i)) {
+            dataToDisplay.push(allData[i]);
+        }
+    }
+
+    console.log(allData);
+    console.log(dataToDisplay);
+
     //Options for the Radar chart, other than default
     var mycfg = {
         w: w,
@@ -87,13 +101,15 @@ function loadData(error, data) {
     //Call function to draw the Radar chart
 	//Will expect that data is in %'s
     //displaySelectedClasses();
-    RadarChart.draw("#chart", allData, mycfg);
+    RadarChart.draw("#chart", dataToDisplay, mycfg);
 
     // Search box
     $( function() {
         $( "#classSearch" ).autocomplete({
-            source: orderedClasses
+            source: orderedClasses,
+            minLength: 0
         });
+
     } );
 
     // Selectable elements
@@ -113,16 +129,51 @@ function loadData(error, data) {
 var classSearchElem = document.getElementById('classSearch');
 classSearchElem.addEventListener("keydown", onClassSearchEnter);
 
+var originalStyle;
+function highlightClass(classIdx) {
+    // console.log(classIdx);
+    let elem = document.getElementById(classIdx);
+    // console.log(elem);
+    originalStyle = elem.style.border;
+    elem.style.border = "thick solid black";
+}
+
+function unhighlightClass(classIdx) {
+    let elem = document.getElementById(classIdx);
+    elem.style.border = originalStyle;
+}
+
+function addClassWidget(classIdx) {
+    let elem = document.getElementById('selectable');
+    let c = document.createElement('li');
+    c.id = classIdx;
+    c.className = 'ui-widget-content';
+    c.innerHTML = orderedClasses[classIdx];
+    c.style.backgroundColor = colorscale(selectedClassIndices.indexOf(classIdx));
+    c.style.opacity = 0.7;
+    //c.addEventListener('mouseover', mouseoverClassWidget);
+    //c.addEventListener('mouseout', mouseoutClassWidget);
+    elem.appendChild(c);
+}
+
 function onClassSearchEnter(e) {
     if (e.keyCode === 13) {  //checks whether the pressed key is "Enter"
         //console.log(e);
         let selectedClass = e.target.value;
-        selectedClassIndices.push(orderedClasses.indexOf(selectedClass));
-        let elem = document.getElementById('selectable');
-        let c = document.createElement('li');
-        c.className = 'ui-widget-content';
-        c.innerHTML = selectedClass;
-        elem.appendChild(c);
+        let classIdx = orderedClasses.indexOf(selectedClass);
+        // TODO add feedback for these
+        if (classIdx < 0 || selectedClassIndices.includes(classIdx) || selectedClassIndices.length >= 5) {
+            return;
+        }
+        selectedClassIndices.push(classIdx);
+        addClassWidget(classIdx);
+
+
+        dataToDisplay.push(allData[classIdx]);
+
+        //console.log(allData);
+        //console.log(dataToDisplay);
+
         //Options for the Radar chart, other than default
         var mycfg = {
             w: w,
@@ -136,8 +187,20 @@ function onClassSearchEnter(e) {
         //Call function to draw the Radar chart
         //Will expect that data is in %'s
         //displaySelectedClasses();
-        RadarChart.draw("#chart", allData, mycfg);
+        RadarChart.draw("#chart", dataToDisplay, mycfg);
     }
+}
+
+function mouseoverClassWidget(e) {
+    //console.log(e);
+    let classIdx = +e.target.id;
+    //console.log(classIdx);
+    highlightClass(classIdx);
+}
+
+function mouseoutClassWidget(e) {
+    let classIdx = +e.target.id;
+    unhighlightClass(classIdx);
 }
 
 
