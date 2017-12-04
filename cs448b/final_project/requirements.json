@@ -1,7 +1,7 @@
 [
   {
     "name": "general_cs_electives",
-    "courses": ["cs 108", "cs 124", "cs 131", "cs 140", "cs 140e", "cs 142", "cs 143", "cs 144", "cs 145", "cs 147", "cs 148", "cs 149", "cs 154", "cs 155", "cs 157", "phil 151", "cs 164", "cs 166", "cs 167", "cs 168", "cs 190", "cs 205a", "cs 205b", "cs 210a", "cs 223a", "cs 224n", "cs 224s", "cs 224u", "cs 224w", "cs 225a", "cs 227b", "cs 228", "cs 229", "cs 229t", "cs 231a", "cs 231b", "cs 231m", "cs 231n", "cs 232", "cs 233", "cs 234", "cs 238", "cs 240", "cs 240h", "cs 242", "cs 243", "cs 244", "cs 244b", "cs 245", "cs 246", "cs 247", "cs 248", "cs 249a", "cs 251", "cs 254", "cs 255", "cs 261", "cs 262", "cs 263", "cs 264", "cs 265", "cs 266", "cs 267", "cs 269i", "cs 270", "cs 272", "cs 273a", "cs 273b", "cs 274", "cs 276", "cs 279", "cs 348b", "cs 348c", "cs 352", "ee 282", "ee 364a", "cme 108", "ee 180"]
+    "courses": ["cs 108", "cs 124", "cs 131", "cs 140-or-cs 140e", "cs 142", "cs 143", "cs 144", "cs 145", "cs 147", "cs 148", "cs 149", "cs 154", "cs 155", "cs 157-or-phil 151", "cs 164", "cs 166", "cs 167", "cs 168", "cs 190", "cs 205a", "cs 205b", "cs 210a", "cs 223a", "cs 224n", "cs 224s", "cs 224u", "cs 224w", "cs 225a", "cs 227b", "cs 228", "cs 229", "cs 229t", "cs 231a", "cs 231b", "cs 231m", "cs 231n", "cs 232", "cs 233", "cs 234", "cs 238", "cs 240", "cs 240h", "cs 242", "cs 243", "cs 244", "cs 244b", "cs 245", "cs 246", "cs 247", "cs 248", "cs 249a", "cs 251", "cs 254", "cs 255", "cs 261", "cs 262", "cs 263", "cs 264", "cs 265", "cs 266", "cs 267", "cs 269i", "cs 270", "cs 272", "cs 273a", "cs 273b", "cs 274", "cs 276", "cs 279", "cs 348b", "cs 348c", "cs 352", "ee 282", "ee 364a", "cme 108", "ee 180"]
   },
   {
     "name": "ai.b.ai_methods",
@@ -85,7 +85,7 @@
   "name": "theory.c",
   "quantity": 2,
   "courses": ["cs 167", "cs 168", "cs 255", "cs 261", "cs 265", "cs 268",
-    "cs 143", "cs 155", "cs 157", "phil 151", "cs 166", "cs 205a", "cs 228",
+    "cs 143", "cs 155", "cs 157-or-phil 151", "cs 166", "cs 205a", "cs 228",
     "cs 233", "cs 242", "cs 250", "cs 251", "cs 254", "cs 259", "cs 262", 
     "cs 263", "cs 266", "cs 267", "cs 269i", "cs 352", "cs 254", "cs 355",
     "cs 357", "cs 358", "cs 359", "cs 364a", "cs 367", "cs 369", "cs 374", 
@@ -94,13 +94,13 @@
   "name": "theory.track_electives",
   "quantity": 3,
   "courses": ["cs 167", "cs 168", "cs 255", "cs 261", "cs 265", "cs 268",
-    "cs 143", "cs 155", "cs 157", "phil 151", "cs 166", "cs 205a", "cs 228",
+    "cs 143", "cs 155", "cs 157-or-phil 151", "cs 166", "cs 205a", "cs 228",
     "cs 233", "cs 242", "cs 250", "cs 251", "cs 254", "cs 259", "cs 262", 
     "cs 263", "cs 266", "cs 267", "cs 269i", "cs 352", "cs 254", "cs 355",
     "cs 357", "cs 358", "cs 359", "cs 364a", "cs 367", "cs 369", "cs 374", 
     "ms&e 310", "cs 269g", "cme 302", "cme 305", "phil 152","cs 108", "cs 124", 
-    "cs 131", "cs 140" ,"cs 140e", "cs 142", "cs 143", "cs 144", "cs 145", 
-    "cs 147", "cs 148", "cs 149", "cs 154", "cs 155", "cs 157", "phil 151", 
+    "cs 131", "cs 140-or-cs 140e", "cs 142", "cs 143", "cs 144", "cs 145", 
+    "cs 147", "cs 148", "cs 149", "cs 154", "cs 155",
     "cs 164", "cs 166", "cs 167", "cs 168", "cs 190", "cs 205a", "cs 205b", 
     "cs 210a", "cs 223a", "cs 224n", "cs 224s", "cs 224u", "cs 224w", "cs 225a",
     "cs 227b", "cs 228", "cs 229", "cs 229t", "cs 231a", "cs 231b", "cs 231m", 
@@ -129,8 +129,8 @@
   "courses": ["cs 143", "ee 180", "cs 144", "cs 145", "cs 149", "cs 155", "cs 190", 
     "cs 240", "cs 242", "cs 243", "cs 244", "cs 245", "ee 271", "ee 282", "cs 269g", 
     "cme 302", "cme 305", "phil 152", "cs 108", "cs 124", 
-    "cs 131", "cs 140" ,"cs 140e", "cs 142", "cs 143", "cs 144", "cs 145", 
-    "cs 147", "cs 148", "cs 149", "cs 154", "cs 155", "cs 157", "phil 151", 
+    "cs 131", "cs 142", "cs 143", "cs 144", "cs 145", 
+    "cs 147", "cs 148", "cs 149", "cs 154", "cs 155", "cs 157-or-phil 151", 
     "cs 164", "cs 166", "cs 167", "cs 168", "cs 190", "cs 205a", "cs 205b", 
     "cs 210a", "cs 223a", "cs 224n", "cs 224s", "cs 224u", "cs 224w", "cs 225a",
     "cs 227b", "cs 228", "cs 229", "cs 229t", "cs 231a", "cs 231b", "cs 231m", 
@@ -151,7 +151,7 @@
 }, {
   "name": "info.b.ii",
   "quantity": 1,
-  "courses": ["cs 140", "cs 140e", "cs 142", "cs 245", "cs 246", "cs 341",
+  "courses": ["cs 140-cs 140e", "cs 142", "cs 245", "cs 246", "cs 341",
     "cs 345", "cs 346", "cs 347"]
 }, {
   "name": "info.b.iii",
@@ -165,11 +165,11 @@
   "name": "info.track_electives",
   "quantity": 3,
   "courses": ["cs 224n", "cs 224s", "cs 229", "cs 233", "cs 234",
-   "cs 108", "cs 124", "cs 140", "cs 140e", "cs 142", "cs 245", "cs 246", "cs 341",
+   "cs 108", "cs 124", "cs 142", "cs 245", "cs 246", "cs 341",
     "cs 345", "cs 346", "cs 347", "cs 262", "cs 270", "cs 274",
     "cs 224w", "cs 276",
-    "cs 131", "cs 140" ,"cs 140e", "cs 142", "cs 143", "cs 144", "cs 145", 
-    "cs 147", "cs 148", "cs 149", "cs 154", "cs 155", "cs 157", "phil 151", 
+    "cs 131", "cs 140-or-cs 140e", "cs 142", "cs 143", "cs 144", "cs 145", 
+    "cs 147", "cs 148", "cs 149", "cs 154", "cs 155", "cs 157-or-phil 151", 
     "cs 164", "cs 166", "cs 167", "cs 168", "cs 190", "cs 205a", "cs 205b", 
     "cs 210a", "cs 223a", "cs 224n", "cs 224s", "cs 224u", "cs 224w", "cs 225a",
     "cs 227b", "cs 228", "cs 229", "cs 229t", "cs 231a", "cs 231b", "cs 231m", 

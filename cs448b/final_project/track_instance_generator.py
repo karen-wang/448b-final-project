@@ -93,6 +93,11 @@ def generate_theory_systems_track_instances(d, track_name):
             req = track_name + r
             options = set(d[req]) - set(track_instance)
             track_instance += random.sample(options, d[req+".quantity"])
+        for i, course in enumerate(track_instance):
+            if OR_DELIM in course:
+                options = course.split(OR_DELIM)
+                new_c = random.choice(options)
+                track_instance[i] = new_c
         counter.update(track_instance)
     return counter
 
@@ -110,6 +115,13 @@ def generate_info_track_instances(d):
         #elective
         options = set(d["info.track_electives"]) - set(track_instance)
         track_instance += random.sample(options, d["info.track_electives.quantity"])
+        
+        for i, course in enumerate(track_instance):
+            if OR_DELIM in course:
+                options = course.split(OR_DELIM)
+                new_c = random.choice(options)
+                track_instance[i] = new_c
+
         counter.update(track_instance)
     return counter
 
@@ -154,6 +166,7 @@ def convert_track_to_vector(track, all_courses):
         track_vec.append(track[course])
     return track_vec
 
+#http://dataaspirant.com/2015/04/11/five-most-popular-similarity-measures-implementation-in-python/
 def get_track_distance(track1, track2):
     t1 = np.array(track1)
     t2 = np.array(track2)
@@ -195,31 +208,42 @@ def main():
     ce2 = generate_compeng_track_instances(dict)
     # pprint(c1 & c2)
     c3 = generate_theory_systems_track_instances(dict, "theory")
+
     c4 = generate_theory_systems_track_instances(dict, "systems")
     c5 = generate_info_track_instances(dict)
     # pprint(c5)
     
 
-
     all_sampled_tracks = {}
-    all_sampled_tracks["AI"] = convert_track_to_vector(c1, all_courses)
-    all_sampled_tracks["compeng"] = convert_track_to_vector(c2, all_courses)
-    all_sampled_tracks["theory"] = convert_track_to_vector(c3, all_courses)
-    all_sampled_tracks["systems"] = convert_track_to_vector(c4, all_courses)
-    all_sampled_tracks["info"] = convert_track_to_vector(c5, all_courses)
+    all_sampled_tracks["AI"] = c1
+    all_sampled_tracks["compeng"] = c2
+    all_sampled_tracks["theory"] = c3
+    all_sampled_tracks["systems"] = c4
+    all_sampled_tracks["info"] = c5
 
-    dists = get_all_track_distances(all_sampled_tracks)
+   
+    data = []
+
+    for course in all_courses:
+        output = get_scores_for_course(course)
+        pprint(output)
+        data.append(output)
+    pprint(data)
+
+    classes_by_track = {}
+    classes_by_track["AI"] = convert_track_to_vector(c1, all_courses)
+    classes_by_track["compeng"] = convert_track_to_vector(c2, all_courses)
+    classes_by_track["theory"] = convert_track_to_vector(c3, all_courses)
+    classes_by_track["systems"] = convert_track_to_vector(c4, all_courses)
+    classes_by_track["info"] = convert_track_to_vector(c5, all_courses)
+
+    dists = get_all_track_distances(classes_by_track)
     print_dists_sorted(dists)
     
 
-    # data = []
-    # for course in all_courses:
-    #     output = get_scores_for_course(course)
-    #     pprint(output)
-    #     data.append(output)
-    # pprint(data)
+    
 
-    # with open('out.json', 'w') as outfile:
-    #     json.dump(data, outfile)
+    with open('out.json', 'w') as outfile:
+        json.dump(data, outfile)
 
 main()
