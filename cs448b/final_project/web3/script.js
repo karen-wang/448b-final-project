@@ -31,7 +31,7 @@ var d = [
 
 var allData;
 var orderedClasses = [];
-var currClassIdx = 0;
+var selectedClassIndices = [];
 
 // Load data from CSV
 d3.csv('out.csv', parseInputRow, loadData);
@@ -50,10 +50,18 @@ function parseInputRow(d) {
     ];
 }
 
-function setCurrClassInfo() {
-    let currClassElem = document.getElementById('currClass');
-    let currClassInfoElem = document.getElementById('currClassInfo');
-    currClassElem.innerHTML = orderedClasses[currClassIdx];
+// function setCurrClassInfo() {
+//     let currClassElem = document.getElementById('currClass');
+//     let currClassInfoElem = document.getElementById('currClassInfo');
+//     currClassElem.innerHTML = orderedClasses[currClassIdx];
+// }
+
+function displaySelectedClasses() {
+    let currClassesElem = document.getElementById('currClasses');
+    currClassesElem.innerHTML = "";
+    selectedClassIndices.forEach(function(classIdx) {
+        currClassesElem.innerHTML += orderedClasses[classIdx] + ', ';
+    });
 }
 
 function loadData(error, data) {
@@ -73,18 +81,31 @@ function loadData(error, data) {
         maxValue: 0.6,
         levels: 6,
         ExtraWidthX: 300,
-        classIdx: currClassIdx
+        classIndices: selectedClassIndices
     }
 
     //Call function to draw the Radar chart
 	//Will expect that data is in %'s
-    setCurrClassInfo();
+    //displaySelectedClasses();
     RadarChart.draw("#chart", allData, mycfg);
 
     // Search box
     $( function() {
         $( "#classSearch" ).autocomplete({
             source: orderedClasses
+        });
+    } );
+
+    // Selectable elements
+    $( function() {
+        $( "#selectable" ).selectable({
+            stop: function() {
+                var result = $( "#select-result" ).empty();
+                $( ".ui-selected", this ).each(function() {
+                    var index = $( "#selectable li" ).index( this );
+                    result.append( " #" + ( index + 1 ) );
+                });
+            }
         });
     } );
 }
@@ -95,8 +116,13 @@ classSearchElem.addEventListener("keydown", onClassSearchEnter);
 function onClassSearchEnter(e) {
     if (e.keyCode === 13) {  //checks whether the pressed key is "Enter"
         //console.log(e);
-        selectedClass = e.target.value;
-        currClassIdx = orderedClasses.indexOf(selectedClass);
+        let selectedClass = e.target.value;
+        selectedClassIndices.push(orderedClasses.indexOf(selectedClass));
+        let elem = document.getElementById('selectable');
+        let c = document.createElement('li');
+        c.className = 'ui-widget-content';
+        c.innerHTML = selectedClass;
+        elem.appendChild(c);
         //Options for the Radar chart, other than default
         var mycfg = {
             w: w,
@@ -104,12 +130,12 @@ function onClassSearchEnter(e) {
             maxValue: 0.6,
             levels: 6,
             ExtraWidthX: 300,
-            classIdx: currClassIdx
+            classIndices: selectedClassIndices
         }
 
         //Call function to draw the Radar chart
         //Will expect that data is in %'s
-        setCurrClassInfo();
+        //displaySelectedClasses();
         RadarChart.draw("#chart", allData, mycfg);
     }
 }

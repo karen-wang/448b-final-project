@@ -110,7 +110,7 @@ var RadarChart = {
 
 
 	d.forEach(function(y, x){
-		if (x != cfg.classIdx) return;
+		if (!cfg.classIndices.includes(x)) return;
 		//console.log(y);
 	  dataValues = [];
 	  g.selectAll(".nodes")
@@ -158,7 +158,7 @@ var RadarChart = {
 
 
 	d.forEach(function(y, x){
-		if (x != cfg.classIdx) return;
+        if (!cfg.classIndices.includes(x)) return;
 	  g.selectAll(".nodes")
 		.data(y).enter()
 		.append("svg:circle")
