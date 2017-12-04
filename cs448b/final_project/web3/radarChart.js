@@ -4,8 +4,8 @@ var RadarChart = {
   draw: function(id, d, options){
   var cfg = {
 	 radius: 5,
-	 w: 600,
-	 h: 600,
+	 w: 800,
+	 h: 800,
 	 factor: 1,
 	 factorLegend: .85,
 	 levels: 3,
@@ -17,7 +17,8 @@ var RadarChart = {
 	 TranslateY: 30,
 	 ExtraWidthX: 100,
 	 ExtraWidthY: 100,
-	 color: d3.scale.category10()
+	 color: d3.scale.category10(),
+	  classIdx: 0,
 	};
 
 	if('undefined' !== typeof options){
@@ -100,7 +101,7 @@ var RadarChart = {
 		.attr("class", "legend")
 		.text(function(d){return d})
 		.style("font-family", "sans-serif")
-		.style("font-size", "11px")
+		.style("font-size", "1em")
 		.attr("text-anchor", "middle")
 		.attr("dy", "1.5em")
 		.attr("transform", function(d, i){return "translate(0, -10)"})
@@ -109,7 +110,7 @@ var RadarChart = {
 
 
 	d.forEach(function(y, x){
-		//if (x != 0) return;
+		if (x != cfg.classIdx) return;
 		//console.log(y);
 	  dataValues = [];
 	  g.selectAll(".nodes")
@@ -157,7 +158,7 @@ var RadarChart = {
 
 
 	d.forEach(function(y, x){
-		//if (x != 0) return;
+		if (x != cfg.classIdx) return;
 	  g.selectAll(".nodes")
 		.data(y).enter()
 		.append("svg:circle")
@@ -183,7 +184,7 @@ var RadarChart = {
 					tooltip
 						.attr('x', newX)
 						.attr('y', newY)
-						.text(Format(d.value))
+						.text(Format(d.value) + ' of all instances of this track include this class')
 						.transition(200)
 						.style('opacity', 1);
 

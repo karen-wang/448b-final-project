@@ -1,10 +1,10 @@
-var w = 500,
-	h = 500;
+var w = 800,
+	h = 800;
 
 var colorscale = d3.scale.category10();
 
 //Legend titles
-var LegendOptions = ['cs 221','cs 147'];
+// var LegendOptions = ['cs 221','cs 147'];
 
 //Data
 var d = [
@@ -29,32 +29,31 @@ var d = [
 		  ]
 		];
 
+var allData;
+var orderedClasses = [];
+var currClassIdx = 0;
+
 // Load data from CSV
-d3.csv('test.csv', parseInputRow, loadData);
+d3.csv('out.csv', parseInputRow, loadData);
 
 function parseInputRow(d) {
-    // return {
-    //     deptCode: d.deptCode,
-    //     classNo: d.classNo,
-    //     scoreAI: d.scoreAI,
-    //     scoreBiocomp: d.scoreBiocomp,
-    //     scoreCompeng: d.scoreCompeng,
-    //     scoreGraphics: d.scoreGraphics,
-    //     scoreHCI: d.scoreHCI,
-    //     scoreInfo: d.scoreInfo,
-    //     scoreSystems: d.scoreSystems,
-    //     scoreTheory: d.scoreTheory,
-    // };
+    orderedClasses.push(d.deptCode + ' ' + d.classNo);
     return [
-		{axis:"AI", value: d.scoreAI},
-        {axis:"Biocomputation", value: d.scoreBiocomp},
-        {axis:"Computer Engineering", value: d.scoreCompeng},
-        {axis:"Graphics", value: d.scoreGraphics},
-        {axis:"HCI", value: d.scoreHCI},
-        {axis:"Info", value: d.scoreInfo},
-        {axis:"Systems", value: d.scoreSystems},
-        {axis:"Theory", value: d.scoreTheory},
+		{axis:"AI", value: +d.scoreAI/100.0},
+        // {axis:"Biocomputation", value: d.scoreBiocomp},
+        {axis:"Computer Engineering", value: +d.scoreCompeng/100.0},
+        // {axis:"Graphics", value: d.scoreGraphics},
+        // {axis:"HCI", value: d.scoreHCI},
+        {axis:"Info", value: +d.scoreInfo/100.0},
+        {axis:"Systems", value: +d.scoreSystems/100.0},
+        {axis:"Theory", value: +d.scoreTheory/100.0},
     ];
+}
+
+function setCurrClassInfo() {
+    let currClassElem = document.getElementById('currClass');
+    let currClassInfoElem = document.getElementById('currClassInfo');
+    currClassElem.innerHTML = orderedClasses[currClassIdx];
 }
 
 function loadData(error, data) {
@@ -62,7 +61,10 @@ function loadData(error, data) {
     	console.log(error);
         throw error; // Runs if there's a problem fetching the csv.
 	}
+	console.log(orderedClasses);
 	console.log(data);
+
+	allData = data;
 
     //Options for the Radar chart, other than default
     var mycfg = {
@@ -70,23 +72,46 @@ function loadData(error, data) {
         h: h,
         maxValue: 0.6,
         levels: 6,
-        ExtraWidthX: 300
+        ExtraWidthX: 300,
+        classIdx: currClassIdx
     }
 
     //Call function to draw the Radar chart
 	//Will expect that data is in %'s
-    RadarChart.draw("#chart", data, mycfg);
+    setCurrClassInfo();
+    RadarChart.draw("#chart", allData, mycfg);
 
+    // Search box
     $( function() {
-        var availableClasses = [
-            "cs 221",
-            "cs 147",
-            "cs 448b"
-        ];
-        $( "#classes" ).autocomplete({
-            source: availableClasses
+        $( "#classSearch" ).autocomplete({
+            source: orderedClasses
         });
     } );
+}
+
+var classSearchElem = document.getElementById('classSearch');
+classSearchElem.addEventListener("keydown", onClassSearchEnter);
+
+function onClassSearchEnter(e) {
+    if (e.keyCode === 13) {  //checks whether the pressed key is "Enter"
+        //console.log(e);
+        selectedClass = e.target.value;
+        currClassIdx = orderedClasses.indexOf(selectedClass);
+        //Options for the Radar chart, other than default
+        var mycfg = {
+            w: w,
+            h: h,
+            maxValue: 0.6,
+            levels: 6,
+            ExtraWidthX: 300,
+            classIdx: currClassIdx
+        }
+
+        //Call function to draw the Radar chart
+        //Will expect that data is in %'s
+        setCurrClassInfo();
+        RadarChart.draw("#chart", allData, mycfg);
+    }
 }
 
 
