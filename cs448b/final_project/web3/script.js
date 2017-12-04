@@ -116,11 +116,11 @@ function loadData(error, data) {
     $( function() {
         $( "#selectable" ).selectable({
             stop: function() {
-                var result = $( "#select-result" ).empty();
-                $( ".ui-selected", this ).each(function() {
-                    var index = $( "#selectable li" ).index( this );
-                    result.append( " #" + ( index + 1 ) );
-                });
+                // var result = $( "#select-result" ).empty();
+                // $( ".ui-selected", this ).each(function() {
+                //     var index = $( "#selectable li" ).index( this );
+                //     result.append( " #" + ( index + 1 ) );
+                // });
             }
         });
     } );
@@ -151,6 +151,12 @@ function addClassWidget(classIdx) {
     c.innerHTML = orderedClasses[classIdx];
     c.style.backgroundColor = colorscale(selectedClassIndices.indexOf(classIdx));
     c.style.opacity = 0.7;
+    c.style.color = 'white'; // hack
+    //console.log(c.style.backgroundColor);
+    // let oldBGColor = colorscale(selectedClassIndices.indexOf(classIdx));
+    // let newBGColor = oldBGColor.replace('rgb','rgba').replace(')', ','+0.5+')');
+    // console.log(newBGColor);
+    // c.style.backgroundColor = newBGColor;
     //c.addEventListener('mouseover', mouseoverClassWidget);
     //c.addEventListener('mouseout', mouseoutClassWidget);
     elem.appendChild(c);
@@ -162,7 +168,7 @@ function onClassSearchEnter(e) {
         let selectedClass = e.target.value;
         let classIdx = orderedClasses.indexOf(selectedClass);
         // TODO add feedback for these
-        if (classIdx < 0 || selectedClassIndices.includes(classIdx) || selectedClassIndices.length >= 5) {
+        if (classIdx < 0 || selectedClassIndices.includes(classIdx) || selectedClassIndices.length >= 10) {
             return;
         }
         selectedClassIndices.push(classIdx);
