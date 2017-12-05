@@ -47,7 +47,8 @@ var RadarChart = {
 
 	//Circular segments
 	for(var j=0; j<cfg.levels-1; j++){
-	  var levelFactor = cfg.factor*radius*((j+1)/cfg.levels);
+	  var levelFactor = cfg.factor*radius*(Math.sqrt((j+1)/cfg.levels));
+	  //console.log('levelFactor', levelFactor);
 	  g.selectAll(".levels")
 	   .data(allAxis)
 	   .enter()
@@ -65,7 +66,7 @@ var RadarChart = {
 
 	//Text indicating at what % each level is
 	for(var j=0; j<cfg.levels; j++){
-	  var levelFactor = cfg.factor*radius*((j+1)/cfg.levels);
+	  var levelFactor = cfg.factor*radius*(Math.sqrt((j+1)/cfg.levels));
 	  g.selectAll(".levels")
 	   .data([1]) //dummy data
 	   .enter()
@@ -77,7 +78,7 @@ var RadarChart = {
 	   .style("font-size", "10px")
 	   .attr("transform", "translate(" + (cfg.w/2-levelFactor + cfg.ToRight) + ", " + (cfg.h/2-levelFactor) + ")")
 	   .attr("fill", "#737373")
-	   .text(Format((j+1)*cfg.maxValue/cfg.levels));
+	   .text(Format(Math.sqrt((j+1)*cfg.maxValue/cfg.levels)));
 	}
 
 	series = 0;

@@ -151,7 +151,7 @@
 }, {
   "name": "info.b.ii",
   "quantity": 1,
-  "courses": ["cs 140-cs 140e", "cs 142", "cs 245", "cs 246", "cs 341",
+  "courses": ["cs 140-or-cs 140e", "cs 142", "cs 245", "cs 246", "cs 341",
     "cs 345", "cs 346", "cs 347"]
 }, {
   "name": "info.b.iii",
@@ -198,8 +198,8 @@
   "quantity": 2,
   "courses": ["artstudi 160", "artstudi 170", "artstudi 179", "cme 302", 
     "cme 306", "ee 262", "ee 264", "ee 278", "ee 368", "me 101", "psych 30", "psych 221",
-    "cs 108", "cs 124", "cs 131", "cs 140" ,"cs 140e", "cs 142", "cs 143", "cs 144", "cs 145", 
-    "cs 147", "cs 148", "cs 149", "cs 154", "cs 155", "cs 157", "phil 151", 
+    "cs 108", "cs 124", "cs 131", "cs 140-or-cs 140e", "cs 142", "cs 143", "cs 144", "cs 145",
+    "cs 147", "cs 148", "cs 149", "cs 154", "cs 155", "cs 157-or-phil 151",
     "cs 164", "cs 166", "cs 167", "cs 168", "cs 190", "cs 205a", "cs 205b", 
     "cs 210a", "cs 223a", "cs 224n", "cs 224s", "cs 224u", "cs 224w", "cs 225a",
     "cs 227b", "cs 228", "cs 229", "cs 229t", "cs 231a", "cs 231b", "cs 231m", 
@@ -229,8 +229,8 @@
     "psych 254", "psych 110", "stats 203", "educ 191x", "humbio 82a", "me 101", "me 115a", 
     "me 203", "me 210", "me 216a", "educ 281x", "educ 239x", "educ 338x", "educ 342", 
     "ms&e 185", "ms&e 331", "music 220a", "music 220b", "music 220c", "music 250a",
-    "cs 108", "cs 124", "cs 131", "cs 140" ,"cs 140e", "cs 142", "cs 143", "cs 144", "cs 145", 
-    "cs 147", "cs 148", "cs 149", "cs 154", "cs 155", "cs 157", "phil 151", 
+    "cs 108", "cs 124", "cs 131", "cs 140-or-cs 140e", "cs 142", "cs 143", "cs 144", "cs 145",
+    "cs 147", "cs 148", "cs 149", "cs 154", "cs 155", "cs 157-or-phil 151",
     "cs 164", "cs 166", "cs 167", "cs 168", "cs 190", "cs 205a", "cs 205b", 
     "cs 210a", "cs 223a", "cs 224n", "cs 224s", "cs 224u", "cs 224w", "cs 225a",
     "cs 227b", "cs 228", "cs 229", "cs 229t", "cs 231a", "cs 231b", "cs 231m", 
