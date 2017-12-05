@@ -130,17 +130,18 @@ var classSearchElem = document.getElementById('classSearch');
 classSearchElem.addEventListener("keydown", onClassSearchEnter);
 
 var originalStyle;
+
 function highlightClass(classIdx) {
     // console.log(classIdx);
     let elem = document.getElementById(classIdx);
     // console.log(elem);
-    originalStyle = elem.style.border;
-    elem.style.border = "thick solid black";
+    originalStyle = elem.style.opacity;
+    elem.style.opacity = 1.0;
 }
 
 function unhighlightClass(classIdx) {
     let elem = document.getElementById(classIdx);
-    elem.style.border = originalStyle;
+    elem.style.opacity = originalStyle;
 }
 
 function addClassWidget(classIdx) {
@@ -157,8 +158,8 @@ function addClassWidget(classIdx) {
     // let newBGColor = oldBGColor.replace('rgb','rgba').replace(')', ','+0.5+')');
     // console.log(newBGColor);
     // c.style.backgroundColor = newBGColor;
-    //c.addEventListener('mouseover', mouseoverClassWidget);
-    //c.addEventListener('mouseout', mouseoutClassWidget);
+    c.addEventListener('mouseover', mouseoverClassWidget);
+    c.addEventListener('mouseout', mouseoutClassWidget);
     elem.appendChild(c);
 }
 

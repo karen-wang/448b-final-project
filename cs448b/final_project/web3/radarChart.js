@@ -145,7 +145,7 @@ var RadarChart = {
 										 .style("fill-opacity", 0.1);
 										g.selectAll(z)
 										 .transition(200)
-										 .style("fill-opacity", .7);
+										 .style("fill-opacity", 1.0);
 										//highlightClass(x);
 									  })
 					 .on('mouseout', function(){
@@ -186,7 +186,7 @@ var RadarChart = {
 					tooltip
 						.attr('x', newX)
 						.attr('y', newY)
-						.text(Format(d.value) + ' of all instances of this track include this class')
+						.text(Format(d.value))
 						.transition(200)
 						.style('opacity', 1);
 
@@ -196,7 +196,7 @@ var RadarChart = {
 						.style("fill-opacity", 0.1);
 					g.selectAll(z)
 						.transition(200)
-						.style("fill-opacity", .7);
+						.style("fill-opacity", 1.0);
 				  })
 		.on('mouseout', function(){
 					tooltip
