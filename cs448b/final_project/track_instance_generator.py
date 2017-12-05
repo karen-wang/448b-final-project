@@ -12,7 +12,7 @@ import csv
 NUM_INSTANCES = 1000
 OR_DELIM = '-or-'
 
-tracknames = ["AI", "compeng", "info", "theory", "systems"]
+tracknames = ["AI", "compeng", "info", "theory", "systems", "HCI", "graphics"]
 
 def generate_AI_track_instances(d):
     counter = Counter()
@@ -126,6 +126,50 @@ def generate_info_track_instances(d):
         counter.update(track_instance)
     return counter
 
+def generate_hci_track_instances(d):
+    counter = Counter()
+    for _ in range(NUM_INSTANCES):
+        track_instance = []
+        #A
+        track_instance += random.sample(set(d["hci.a"]), d["hci.a.quantity"])
+        #B
+        track_instance += random.sample(set(d["hci.b"]), d["hci.b.quantity"])
+        #C
+        options = set(d["hci.c"]) - set(track_instance)
+        track_instance += random.sample(options, d["hci.c.quantity"])
+        
+        for i, course in enumerate(track_instance):
+            if OR_DELIM in course:
+                options = course.split(OR_DELIM)
+                new_c = random.choice(options)
+                track_instance[i] = new_c
+
+        counter.update(track_instance)
+    return counter
+
+def generate_graphics_track_instances(d):
+    counter = Counter()
+    for _ in range(NUM_INSTANCES):
+        track_instance = []
+        #A
+        track_instance += random.sample(set(d["graphics.a"]), d["graphics.a.quantity"])
+        #B
+        track_instance += random.sample(set(d["graphics.b"]), d["graphics.b.quantity"])
+        #C
+        track_instance += random.sample(set(d["graphics.c"]), d["graphics.c.quantity"])
+        #elective
+        options = set(d["graphics.track_electives"]) - set(track_instance)
+        track_instance += random.sample(options, d["graphics.track_electives.quantity"])
+        
+        for i, course in enumerate(track_instance):
+            if OR_DELIM in course:
+                options = course.split(OR_DELIM)
+                new_c = random.choice(options)
+                track_instance[i] = new_c
+
+        counter.update(track_instance)
+    return counter
+
 def load_data():
     global all_courses
     all_courses = []
@@ -209,7 +253,7 @@ def outputCSV():
         writer.writerow(['deptCode','classNo',
                          'scoreAI','scoreCompeng',
                          'scoreInfo','scoreSystems',
-                         'scoreTheory'])
+                         'scoreTheory', 'scoreHCI', 'scoreGraphics'])
         for course in all_courses:
             output = get_scores_for_course(course)
             # print(output)
@@ -222,7 +266,9 @@ def outputCSV():
             score_info = track_scores[tracknames.index('info')]
             score_systems = track_scores[tracknames.index('systems')]
             score_theory = track_scores[tracknames.index('theory')]
-            writer.writerow([dept_code, class_no, score_ai, score_compeng, score_info, score_systems, score_theory])
+            score_hci = track_scores[tracknames.index('HCI')]
+            score_graphics = track_scores[tracknames.index('graphics')]
+            writer.writerow([dept_code, class_no, score_ai, score_compeng, score_info, score_systems, score_theory, score_hci, score_graphics])
 
 def outputJSON():
     data = []
@@ -265,6 +311,8 @@ def main():
     c4 = generate_theory_systems_track_instances(dict, "systems")
     c5 = generate_info_track_instances(dict)
     # pprint(c5)
+    c6 = generate_hci_track_instances(dict)
+    c7 = generate_info_track_instances(dict)
 
     all_sampled_tracks = {}
     all_sampled_tracks["AI"] = c1
@@ -272,6 +320,8 @@ def main():
     all_sampled_tracks["theory"] = c3
     all_sampled_tracks["systems"] = c4
     all_sampled_tracks["info"] = c5
+    all_sampled_tracks["HCI"] = c6
+    all_sampled_tracks["graphics"] = c7
 
    
     # data = []
@@ -287,11 +337,13 @@ def main():
     classes_by_track["theory"] = convert_track_to_vector(c3, all_courses)
     classes_by_track["systems"] = convert_track_to_vector(c4, all_courses)
     classes_by_track["info"] = convert_track_to_vector(c5, all_courses)
+    classes_by_track["HCI"] = convert_track_to_vector(c6, all_courses)
+    classes_by_track["graphics"] = convert_track_to_vector(c7, all_courses)
 
     # dists = get_all_track_distances(classes_by_track)
     # print_dists_sorted(dists)
 
-   # outputCSV()
+    # outputCSV()
 
     writeHeatmapTSV(classes_by_track)
 
