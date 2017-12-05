@@ -247,7 +247,7 @@ def writeHeatmapTSV(tracks):
                 t1 = tracknames[i]
                 t2 = tracknames[j]
                 heatmap_file.write('%d\t%d\t%.4f\n' % (i+1, j+1, get_track_distance(tracks[t1], tracks[t2])))
-                heatmap_file.write('%d\t%d\t%.4f\n' % (j+1, i+1, get_track_distance(tracks[t1], tracks[t2])))
+                #heatmap_file.write('%d\t%d\t%.4f\n' % (j+1, i+1, get_track_distance(tracks[t1], tracks[t2])))
                 #dist_dict[t1+ ' and ' +t2] = get_track_distance(tracks[t1], tracks[t2])
         heatmap_file.close()
 

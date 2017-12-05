@@ -1,11 +1,11 @@
 var margin = { top: 50, right: 0, bottom: 100, left: 100 },
           width = 960 - margin.left - margin.right,
-          height = 500 - margin.top - margin.bottom,
-          legendspace = 20,
+          height = 570 - margin.top - margin.bottom,
+          legendspace = 0,
           gridSize = Math.floor(width / 12), //switch basd on num tracks
           legendElementWidth = .8*gridSize,
-          buckets = 11,
-          colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"], // alternatively colorbrewer.YlGnBu[9]
+          buckets = 8,
+          colors = colorbrewer.Purples[buckets],//["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"], // alternatively colorbrewer.YlGnBu[9]
           days = ["AI", "CompEng", "Info", "Theory", "Systems"],
           //times = ["1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a", "12a", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p", "12p"];
           datasets = ["track-track.tsv"];
@@ -66,12 +66,18 @@ var margin = { top: 50, right: 0, bottom: 100, left: 100 },
               .attr("class", "hour bordered")
               .attr("width", gridSize)
               .attr("height", gridSize)
-              .style("fill", colors[0]);
+              .style("fill", "white");
 
           cards.transition().duration(1000)
               .style("fill", function(d) { 
-                console.log(colorScale(d.value))
-                return colorScale(d.value); 
+                
+                var COMPRESS = true
+                if (COMPRESS) {
+                  return colorScale(Math.pow(d.value, .6)); 
+                } else {
+                  return colorScale(d.value); 
+                }
+                
               });
 
           cards.select("title").text(function(d) { return d.value; });
@@ -98,7 +104,7 @@ var margin = { top: 50, right: 0, bottom: 100, left: 100 },
               return "≥ " + Math.round(10*d)/10.0; 
             })
             .attr("x", function(d, i) { return legendElementWidth * i; })
-            .attr("y", height + gridSize + legendspace);
+            .attr("y", height + gridSize);
 
           legend.exit().remove();
 
