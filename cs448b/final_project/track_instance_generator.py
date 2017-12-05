@@ -50,6 +50,23 @@ def generate_AI_track_instances(d):
     #pprint(counter)
     return counter
 
+def generate_biocomp_track_instances(d):
+    counter = Counter()
+    for _ in range(NUM_INSTANCES):
+        track_instance = []
+        # A
+        a_courses = d['biocomp.a']
+        b_courses = d['biocomp.b']
+        track_instance.append(random.choice(a_courses))
+        # B
+        track_instance.append(random.choice(b_courses))
+        # C
+        c_courses = list(set(a_courses + b_courses + d['biocomp.c']) - set(track_instance))
+        track_instance.append(random.choice(c_courses))
+
+        # TODO finish this
+
+
 def generate_compeng_track_instances(d):
     counter = Counter()
     for _ in range(NUM_INSTANCES):
