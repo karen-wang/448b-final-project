@@ -1,8 +1,15 @@
+* {
+    font-size: 20px;
+}
+
 body {
     
     margin: 2em;
-    font-size: 14px;
     font-family: "Helvetica Neue", Helvetica;
+}
+
+h1 {
+    font-size: 48px;
 }
 
 /*#chart {
@@ -10,6 +17,32 @@ body {
     top: 50px;
     left: 250px;
 }*/
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+    margin-bottom: 20px;
+}
+
+#col1 {
+    width: 200px;
+}
+
+.column {
+    float: left;
+    margin: 2%;
+}
+
+#classSearch {
+    font-size: 1em;
+    width: 90%;
+}
+
+#selectable {
+    width: 90%;
+}
 
 #heatmap {
 	margin-bottom: 10;
@@ -37,5 +70,10 @@ rect.bordered {
 #feedback { font-size: 1em; }
 #selectable .ui-selecting { background: #FECA40; }
 #selectable .ui-selected { background: #F39814; color: white; }
-#selectable { list-style-type: none; margin: 0; padding: 0; width: 10%; }
-#selectable li { margin: 0.1em; padding: 0.4em; font-size: 1em; height: 1em; }
+#selectable { list-style-type: none; margin: 0; padding: 0; width: 90%; }
+#selectable li {
+    margin: 0.1em;
+    padding: 0.4em;
+    font-size: 1em;
+    /*height: 1em;*/
+}

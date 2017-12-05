@@ -75,7 +75,7 @@ var RadarChart = {
 	   .attr("y", function(d){return levelFactor*(1-cfg.factor*Math.cos(0));})
 	   .attr("class", "legend")
 	   .style("font-family", "sans-serif")
-	   .style("font-size", "10px")
+	   .style("font-size", "0.7em")
 	   .attr("transform", "translate(" + (cfg.w/2-levelFactor + cfg.ToRight) + ", " + (cfg.h/2-levelFactor) + ")")
 	   .attr("fill", "#737373")
 	   .text(Format(Math.sqrt((j+1)*cfg.maxValue/cfg.levels)));
@@ -104,7 +104,7 @@ var RadarChart = {
 		.style("font-family", "sans-serif")
 		.style("font-size", "1em")
 		.attr("text-anchor", "middle")
-		.attr("dy", "1.5em")
+		.attr("dy", "1em")
 		.attr("transform", function(d, i){return "translate(0, -10)"})
 		.attr("x", function(d, i){return cfg.w/2*(1-cfg.factorLegend*Math.sin(i*cfg.radians/total))-60*Math.sin(i*cfg.radians/total);})
 		.attr("y", function(d, i){return cfg.h/2*(1-Math.cos(i*cfg.radians/total))-20*Math.cos(i*cfg.radians/total);});

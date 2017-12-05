@@ -21,6 +21,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web3/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="418">
+              <caret line="37" column="27" lean-forward="false" selection-start-line="37" selection-start-column="27" selection-end-line="37" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="data.csv" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web3/data.csv">
           <provider selected="true" editor-type-id="text-editor">
@@ -31,11 +41,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="radarChart.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="radarChart.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web3/radarChart.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="50" column="8" lean-forward="false" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="8" />
+            <state relative-caret-position="361">
+              <caret line="79" column="24" lean-forward="false" selection-start-line="79" selection-start-column="24" selection-end-line="79" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web3/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="11" column="19" lean-forward="false" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -44,8 +64,8 @@
       <file leaf-file-name="script.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web3/script.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="197" column="5" lean-forward="true" selection-start-line="197" selection-start-column="5" selection-end-line="197" selection-end-column="5" />
+            <state relative-caret-position="3230">
+              <caret line="170" column="28" lean-forward="false" selection-start-line="170" selection-start-column="20" selection-end-line="170" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -67,13 +87,17 @@
       <find>RadarChart</find>
       <find>hover</find>
       <find>draw</find>
-      <find>em</find>
       <find>highlight</find>
       <find>cfg.color</find>
       <find>194h</find>
       <find>series</find>
       <find>selectedClass</find>
       <find>124</find>
+      <find>em</find>
+      <find>text</find>
+      <find>1.0em</find>
+      <find>selectable</find>
+      <find>feedback</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -92,13 +116,13 @@
         <option value="$PROJECT_DIR$/web2/index.html" />
         <option value="$PROJECT_DIR$/web2/radarDraw.js" />
         <option value="$PROJECT_DIR$/web3/test.csv" />
-        <option value="$PROJECT_DIR$/web3/index.html" />
-        <option value="$PROJECT_DIR$/web3/style.css" />
         <option value="$PROJECT_DIR$/requirements.json" />
         <option value="$PROJECT_DIR$/track_instance_generator.py" />
         <option value="$PROJECT_DIR$/web3/out.csv" />
         <option value="$PROJECT_DIR$/web3/script.js" />
         <option value="$PROJECT_DIR$/web3/radarChart.js" />
+        <option value="$PROJECT_DIR$/web3/index.html" />
+        <option value="$PROJECT_DIR$/web3/style.css" />
       </list>
     </option>
   </component>
@@ -215,7 +239,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16394000" />
+    <option name="totallyTimeSpent" value="18467000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="4" y="22" width="1268" height="778" extended-state="0" />
@@ -264,51 +288,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/web3/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="27" column="8" lean-forward="false" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web3/radarChart.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="49" column="24" lean-forward="false" selection-start-line="49" selection-start-column="24" selection-end-line="49" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web3/test.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="108" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web3/script.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="197" column="5" lean-forward="true" selection-start-line="197" selection-start-column="5" selection-end-line="197" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/out.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="7514" lean-forward="false" selection-start-line="0" selection-start-column="7514" selection-end-line="0" selection-end-column="7514" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cs_reqs.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/requirements.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -317,18 +296,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/track_instance_generator.py">
+    <entry file="file://$PROJECT_DIR$/out.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
+          <caret line="22" column="37" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="217" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web3/track-track.tsv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/parsed_cs_reqs.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reqs_parser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web3/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3230">
+          <caret line="170" column="28" lean-forward="false" selection-start-line="170" selection-start-column="20" selection-end-line="170" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/track_instance_generator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
           <caret line="229" column="28" lean-forward="false" selection-start-line="229" selection-start-column="28" selection-end-line="229" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/out.csv">
+    <entry file="file://$PROJECT_DIR$/web3/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="22" column="37" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="217" selection-end-column="0" />
+        <state relative-caret-position="285">
+          <caret line="34" column="32" lean-forward="false" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
           <folding />
         </state>
       </provider>
@@ -573,15 +592,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web3/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="27" column="8" lean-forward="false" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
+        <state relative-caret-position="418">
+          <caret line="37" column="27" lean-forward="false" selection-start-line="37" selection-start-column="27" selection-end-line="37" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web3/radarChart.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="50" column="8" lean-forward="false" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="8" />
+        <state relative-caret-position="361">
+          <caret line="79" column="24" lean-forward="false" selection-start-line="79" selection-start-column="24" selection-end-line="79" selection-end-column="29" />
           <folding />
         </state>
       </provider>
@@ -595,8 +615,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web3/script.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="197" column="5" lean-forward="true" selection-start-line="197" selection-start-column="5" selection-end-line="197" selection-end-column="5" />
+        <state relative-caret-position="3230">
+          <caret line="170" column="28" lean-forward="false" selection-start-line="170" selection-start-column="20" selection-end-line="170" selection-end-column="28" />
           <folding />
         </state>
       </provider>
@@ -624,18 +644,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/track_instance_generator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="229" column="28" lean-forward="false" selection-start-line="229" selection-start-column="28" selection-end-line="229" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/out.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="22" column="37" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="217" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/track_instance_generator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="326" column="26" lean-forward="false" selection-start-line="326" selection-start-column="26" selection-end-line="326" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web3/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="19" lean-forward="false" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
           <folding />
         </state>
       </provider>
