@@ -8,6 +8,7 @@ from numpy import linalg
 import scipy as sp
 from scipy import spatial
 import csv
+import pandas as pd
 
 NUM_INSTANCES = 1000
 OR_DELIM = '-or-'
@@ -298,9 +299,20 @@ def writeHeatmapTSV(tracks):
         heatmap_file.close()
 
 
+def get_course_title_and_description(course_info, deptCode, classNo):
+    course_id = (deptCode + " " + classNo).upper()
+    row = course_info[course_info.id == course_id]
+    title = row.iloc[0][1]
+    description = row.iloc[0][2]
+    return title, description
+
+
 def main():
     global all_sampled_tracks
     dict, all_courses = load_data()
+    #loads the course info into pandas data frame
+    course_info = pd.read_csv('parsed_cs_reqs.csv')
+    
     c1 = generate_AI_track_instances(dict)
     ai2 = generate_AI_track_instances(dict)
     c2 = generate_compeng_track_instances(dict)
