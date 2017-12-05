@@ -11,33 +11,43 @@
 	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="RadarChart.js"></script>
 
+
   </head>
   <body>
-  <h1>Gotta Track 'Em All!</h1>
+  <div min-height="2000px">
+    <h1>Gotta Track 'Em All!</h1>
 
-    <div>Search for a class:</div>
-    <input id="classSearch">
+      <div>Search for a class:</div>
+      <input id="classSearch">
 
-  <h3 id="currClass"></h3>
-  <p id="currClassInfo"></p>
-  <h3 id="currClasses"></h3>
-  <p id="feedback">
-      <!--<span>You've selected:</span> <span id="select-result">none</span>.-->
-  </p>
-  <ol id="selectable">
-      <!--<li class="ui-widget-content">Item 1</li>-->
-      <!--<li class="ui-widget-content">Item 2</li>-->
-      <!--<li class="ui-widget-content">Item 3</li>-->
-      <!--<li class="ui-widget-content">Item 4</li>-->
-      <!--<li class="ui-widget-content">Item 5</li>-->
-      <!--<li class="ui-widget-content">Item 6</li>-->
-      <!--<li class="ui-widget-content">Item 7</li>-->
-  </ol>
+    
+    <h3 id="currClass"></h3>
+    <p id="currClassInfo"></p>
+    <h3 id="currClasses"></h3>
+    <p id="feedback">
+        <!--<span>You've selected:</span> <span id="select-result">none</span>.-->
+    </p>
+    <ol id="selectable">
+        <!--<li class="ui-widget-content">Item 1</li>-->
+        <!--<li class="ui-widget-content">Item 2</li>-->
+        <!--<li class="ui-widget-content">Item 3</li>-->
+        <!--<li class="ui-widget-content">Item 4</li>-->
+        <!--<li class="ui-widget-content">Item 5</li>-->
+        <!--<li class="ui-widget-content">Item 6</li>-->
+        <!--<li class="ui-widget-content">Item 7</li>-->
+    </ol>
 
-	  <div id="chart"></div>
+  	<div id="chart"></div>
 
-	
+	</div>
+
+ 
+    <div id="heatmap"></div>
+    <div id="dataset-picker"></div>
+  
+
     <script type="text/javascript" src="script.js"></script>
+     <script type="text/javascript" src="heatmap.js"></script>
 
   </body>
 </html>

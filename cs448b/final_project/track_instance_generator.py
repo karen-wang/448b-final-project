@@ -9,7 +9,7 @@ import scipy as sp
 from scipy import spatial
 import csv
 
-NUM_INSTANCES = 5000
+NUM_INSTANCES = 1000
 OR_DELIM = '-or-'
 
 tracknames = ["AI", "compeng", "info", "theory", "systems"]
@@ -235,6 +235,23 @@ def outputJSON():
     with open('out.json', 'w') as outfile:
         json.dump(data, outfile)
 
+def writeHeatmapTSV(tracks):
+
+    tracknames = tracks.keys()    
+    
+
+    with open("./web3/track-track.tsv", "w") as heatmap_file:
+        heatmap_file.write("track1\ttrack2\tsimilarity\n")
+        for i in range(len(tracknames)):
+            for j in range(i, len(tracknames)):
+                t1 = tracknames[i]
+                t2 = tracknames[j]
+                heatmap_file.write('%d\t%d\t%.4f\n' % (i+1, j+1, get_track_distance(tracks[t1], tracks[t2])))
+                heatmap_file.write('%d\t%d\t%.4f\n' % (j+1, i+1, get_track_distance(tracks[t1], tracks[t2])))
+                #dist_dict[t1+ ' and ' +t2] = get_track_distance(tracks[t1], tracks[t2])
+        heatmap_file.close()
+
+
 def main():
     global all_sampled_tracks
     dict, all_courses = load_data()
@@ -257,12 +274,12 @@ def main():
     all_sampled_tracks["info"] = c5
 
    
-    data = []
-    for course in all_courses:
-        output = get_scores_for_course(course)
-        pprint(output)
-        data.append(output)
-    pprint(data)
+    # data = []
+    # for course in all_courses:
+    #     output = get_scores_for_course(course)
+    #     pprint(output)
+    #     data.append(output)
+    # pprint(data)
 
     classes_by_track = {}
     classes_by_track["AI"] = convert_track_to_vector(c1, all_courses)
@@ -271,9 +288,11 @@ def main():
     classes_by_track["systems"] = convert_track_to_vector(c4, all_courses)
     classes_by_track["info"] = convert_track_to_vector(c5, all_courses)
 
-    dists = get_all_track_distances(classes_by_track)
-    print_dists_sorted(dists)
+    # dists = get_all_track_distances(classes_by_track)
+    # print_dists_sorted(dists)
 
-    outputCSV()
+   # outputCSV()
+
+    writeHeatmapTSV(classes_by_track)
 
 main()
