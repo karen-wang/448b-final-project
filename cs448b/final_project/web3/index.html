@@ -43,14 +43,28 @@
 
 	</div>
 
-  <div>
+  <div class="row">
+    <div class="col-sm-4">
+      <span id="heatmap-info">
+        <div style="width: 500px; height: 500px; stroke: black; stroke-width: 2px; text-align: center">
+          <div>Track Information</div>
+          <div style="text-align: left; margin-left: 100px;">
+
+            <div id="track1-name">Track 1: </div>
+            <div id="track2-name">Track 2: </div>
+            <div id="similarity">Similarity: </div>
+            <div>Most Common Classes in Both: </div>
+            <div id="track1-common"></div>
+
+          </div>
+        </div>
+      </span>
+    </div>
     
-    <span id="heatmap-info">hi
-      <div style="background-color: red; width: 200px; height: 500px"></div>
-    </span>
-    <span>
+    
+    <div class="col-sm-8">
       <span id="heatmap"></span>
-    </span>
+    </div>
     
   </div>
 

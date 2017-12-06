@@ -333,6 +333,35 @@ def get_course_title_and_description(course_info, deptCode, classNo):
     return title, description
 
 
+def get_common_classes(all_sampled_tracks):
+    
+    tracknames = sorted(all_sampled_tracks.keys())
+
+    with open("./web3/common_classes.tsv", "w") as file:
+        file.write("track1\ttrack2\tc1\tc2\tc3\tc4\tc5\n")
+        for i in range(len(tracknames)):
+            for j in range(i, len(tracknames)):
+                t1 = tracknames[i]
+                t2 = tracknames[j]
+                c = all_sampled_tracks[t1] & all_sampled_tracks[t2]
+                
+                shared_classes = c.most_common(5)
+                file.write('%d\t%d\t' % (i+1, j+1))
+                for course in shared_classes:
+                    (name, ct) = course
+                    file.write('%s\t' % (name))
+                file.write('\n')
+
+                print (t1, t2, i+1, j+1, c.most_common(3))
+                file.write('%d\t%d\t' % (j+1, i+1))
+                for course in shared_classes:
+                    (name, ct) = course
+                    file.write('%s\t' % (name))
+                file.write('\n')
+
+        file.close()
+
+
 def main():
     global all_sampled_tracks
     dict, all_courses = load_data()
@@ -343,7 +372,10 @@ def main():
     ai2 = generate_AI_track_instances(dict)
     c2 = generate_compeng_track_instances(dict)
     ce2 = generate_compeng_track_instances(dict)
+    # pprint(c1)
+    # pprint(c2)
     # pprint(c1 & c2)
+    
     c3 = generate_theory_systems_track_instances(dict, "theory")
 
     c4 = generate_theory_systems_track_instances(dict, "systems")
@@ -353,29 +385,30 @@ def main():
     c7 = generate_graphics_track_instances(dict)
 
     all_sampled_tracks = {}
-    all_sampled_tracks["AI"] = c1
+    all_sampled_tracks["ai"] = c1
     all_sampled_tracks["compeng"] = c2
     all_sampled_tracks["theory"] = c3
     all_sampled_tracks["systems"] = c4
     all_sampled_tracks["info"] = c5
-    all_sampled_tracks["HCI"] = c6
+    all_sampled_tracks["hci"] = c6
     all_sampled_tracks["graphics"] = c7
 
    
+    get_common_classes(all_sampled_tracks)
     # data = []
     # for course in all_courses:
     #     output = get_scores_for_course(course)
     #     pprint(output)
     #     data.append(output)
     # pprint(data)
-
+    return
     classes_by_track = {}
-    classes_by_track["AI"] = convert_track_to_vector(c1, all_courses)
+    classes_by_track["ai"] = convert_track_to_vector(c1, all_courses)
     classes_by_track["compeng"] = convert_track_to_vector(c2, all_courses)
     classes_by_track["theory"] = convert_track_to_vector(c3, all_courses)
     classes_by_track["systems"] = convert_track_to_vector(c4, all_courses)
     classes_by_track["info"] = convert_track_to_vector(c5, all_courses)
-    classes_by_track["HCI"] = convert_track_to_vector(c6, all_courses)
+    classes_by_track["hci"] = convert_track_to_vector(c6, all_courses)
     classes_by_track["graphics"] = convert_track_to_vector(c7, all_courses)
 
     # dists = get_all_track_distances(classes_by_track)
