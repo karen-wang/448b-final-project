@@ -183,19 +183,19 @@ var classSearchElem = document.getElementById('classSearch');
 classSearchElem.addEventListener("keydown", onClassSearchEnter);
 
 
-var originalStyle;
+var BASE_OPACITY = 0.7;
 
 function highlightClass(classIdx) {
     // console.log(classIdx);
     let elem = document.getElementById(classIdx);
     // console.log(elem);
-    originalStyle = elem.style.opacity;
+    // originalStyle = elem.style.opacity;
     elem.style.opacity = 1.0;
 }
 
 function unhighlightClass(classIdx) {
     let elem = document.getElementById(classIdx);
-    elem.style.opacity = originalStyle;
+    elem.style.opacity = BASE_OPACITY;
 }
 
 function addClassWidget(classIdx) {
@@ -207,7 +207,7 @@ function addClassWidget(classIdx) {
 
     //c.innerHTML += '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>';
     c.style.backgroundColor = colorscale(selectedClassIndices.indexOf(classIdx));
-    c.style.opacity = 0.7;
+    c.style.opacity = BASE_OPACITY;
     c.style.color = 'white'; // hack
     //console.log(c.style.backgroundColor);
     // let oldBGColor = colorscale(selectedClassIndices.indexOf(classIdx));
@@ -217,7 +217,7 @@ function addClassWidget(classIdx) {
     c.addEventListener('mouseover', mouseoverClassWidget);
     c.addEventListener('mouseout', mouseoutClassWidget);
     // let s = document.createElement('span');
-    // s.className = 'glyphicon glyphicon-remove';
+    // s = 'glyphicon glyphicon-remove';
     // elem.appendChild(s);
     elem.appendChild(c);
 }

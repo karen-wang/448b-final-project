@@ -26,13 +26,8 @@ h1 {
     margin-bottom: 20px;
 }
 
-#col1 {
-    width: 200px;
-}
-
-.column {
-    float: left;
-    margin: 2%;
+.glyphicon-remove {
+    float: right;
 }
 
 #classSearch {
