@@ -57,8 +57,16 @@ h1 {
     margin-bottom: 20px;
 }
 
-.glyphicon-remove {
+.remove-btn {
     float: right;
+}
+
+.btn-default {
+    font-size: 20px;
+}
+
+.ui-widget-content {
+    min-width: 150px;
 }
 
 #classSearch {
