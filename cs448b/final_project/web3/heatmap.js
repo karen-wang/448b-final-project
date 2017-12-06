@@ -99,7 +99,7 @@ var margin = { top: 30, right: 0, bottom: 100, left: 100 },
                   return colorScale(Math.pow(d.value, .5)); 
                 } else {
                   console.log(tracks[d.day-1], tracks[d.hour-1], d.value*2.5)
-                  return colorScale(d.value*1.4); 
+                  return colorScale(d.value*1.7); 
                 }
               });
 
@@ -126,7 +126,7 @@ var margin = { top: 30, right: 0, bottom: 100, left: 100 },
             .attr("class", "mono")
             .text(function(d) { 
               console.log(d)
-              return "≥ " + Math.round(10000*Math.pow(d, 1)/140.0)/100.0; 
+              return "≥ " + Math.round(10000*Math.pow(d, 1)/170.0)/100.0; 
             })
             .attr("x", function(d, i) { return legendElementWidth * i-LEGEND_SHIFT; })
             .attr("y", height + gridSize);
