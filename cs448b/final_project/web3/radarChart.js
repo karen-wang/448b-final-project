@@ -47,7 +47,8 @@ var RadarChart = {
 
 	//Circular segments
 	for(var j=0; j<cfg.levels-1; j++){
-	  var levelFactor = cfg.factor*radius*((j+1)/cfg.levels);
+	  var levelFactor = cfg.factor*radius*(Math.sqrt((j+1)/cfg.levels));
+	  //console.log('levelFactor', levelFactor);
 	  g.selectAll(".levels")
 	   .data(allAxis)
 	   .enter()
@@ -65,7 +66,7 @@ var RadarChart = {
 
 	//Text indicating at what % each level is
 	for(var j=0; j<cfg.levels; j++){
-	  var levelFactor = cfg.factor*radius*((j+1)/cfg.levels);
+	  var levelFactor = cfg.factor*radius*(Math.sqrt((j+1)/cfg.levels));
 	  g.selectAll(".levels")
 	   .data([1]) //dummy data
 	   .enter()
@@ -74,10 +75,10 @@ var RadarChart = {
 	   .attr("y", function(d){return levelFactor*(1-cfg.factor*Math.cos(0));})
 	   .attr("class", "legend")
 	   .style("font-family", "sans-serif")
-	   .style("font-size", "10px")
+	   .style("font-size", "0.7em")
 	   .attr("transform", "translate(" + (cfg.w/2-levelFactor + cfg.ToRight) + ", " + (cfg.h/2-levelFactor) + ")")
 	   .attr("fill", "#737373")
-	   .text(Format((j+1)*cfg.maxValue/cfg.levels));
+	   .text(Format(Math.sqrt((j+1)*cfg.maxValue/cfg.levels)));
 	}
 
 	series = 0;
@@ -103,7 +104,7 @@ var RadarChart = {
 		.style("font-family", "sans-serif")
 		.style("font-size", "1em")
 		.attr("text-anchor", "middle")
-		.attr("dy", "1.5em")
+		.attr("dy", "1em")
 		.attr("transform", function(d, i){return "translate(0, -10)"})
 		.attr("x", function(d, i){return cfg.w/2*(1-cfg.factorLegend*Math.sin(i*cfg.radians/total))-60*Math.sin(i*cfg.radians/total);})
 		.attr("y", function(d, i){return cfg.h/2*(1-Math.cos(i*cfg.radians/total))-20*Math.cos(i*cfg.radians/total);});
@@ -145,7 +146,7 @@ var RadarChart = {
 										 .style("fill-opacity", 0.1);
 										g.selectAll(z)
 										 .transition(200)
-										 .style("fill-opacity", .7);
+										 .style("fill-opacity", 1.0);
 										//highlightClass(x);
 									  })
 					 .on('mouseout', function(){
@@ -186,7 +187,7 @@ var RadarChart = {
 					tooltip
 						.attr('x', newX)
 						.attr('y', newY)
-						.text(Format(d.value) + ' of all instances of this track include this class')
+						.text(Format(d.value))
 						.transition(200)
 						.style('opacity', 1);
 
@@ -196,7 +197,7 @@ var RadarChart = {
 						.style("fill-opacity", 0.1);
 					g.selectAll(z)
 						.transition(200)
-						.style("fill-opacity", .7);
+						.style("fill-opacity", 1.0);
 				  })
 		.on('mouseout', function(){
 					tooltip

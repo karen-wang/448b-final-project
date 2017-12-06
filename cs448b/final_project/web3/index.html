@@ -3,6 +3,8 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
       <title>Gotta Track 'Em All!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
       <link rel="stylesheet" href="style.css">
   <title>Radar chart</title>
@@ -17,28 +19,27 @@
   <body>
   <div min-height="2000px">
     <h1>Gotta Track 'Em All!</h1>
+    <div class="row">
+      <div class="col-sm-2">
+          <div>Search for a class:</div>
+          <div><input id="classSearch"></div>
+          <p id="feedback">
+            <!--<span>You've selected:</span> <span id="select-result">none</span>.-->
+          </p>
+        <div>
+          <ol id="selectable"></ol>
+        </div>
 
-      <div>Search for a class:</div>
-      <input id="classSearch">
-
-    
-    <h3 id="currClass"></h3>
-    <p id="currClassInfo"></p>
-    <h3 id="currClasses"></h3>
-    <p id="feedback">
-        <!--<span>You've selected:</span> <span id="select-result">none</span>.-->
-    </p>
-    <ol id="selectable">
-        <!--<li class="ui-widget-content">Item 1</li>-->
-        <!--<li class="ui-widget-content">Item 2</li>-->
-        <!--<li class="ui-widget-content">Item 3</li>-->
-        <!--<li class="ui-widget-content">Item 4</li>-->
-        <!--<li class="ui-widget-content">Item 5</li>-->
-        <!--<li class="ui-widget-content">Item 6</li>-->
-        <!--<li class="ui-widget-content">Item 7</li>-->
-    </ol>
-
-  	<div id="chart"></div>
+      </div>
+      <!--<div class="col-sm-2">-->
+        <!--<h3 id="currClass"></h3>-->
+        <!--<p id="currClassInfo"></p>-->
+        <!--<h3 id="currClasses"></h3>-->
+      <!--</div>-->
+      <div class="col-sm-10" id="">
+        <div id="chart"></div>
+      </div>
+    </div>
 
 	</div>
 

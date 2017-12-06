@@ -35,20 +35,20 @@ var selectedClassIndices = [];
 var dataToDisplay = [];
 
 // Load data from CSV
-d3.csv('out.csv', parseInputRow, loadData);
+d3.csv('data.csv', parseInputRow, loadData);
 
 function parseInputRow(d) {
     let courseName = d.deptCode + ' ' + d.classNo;
     orderedClasses.push(courseName);
     return [
-		{axis:"AI", value: +d.scoreAI/100.0},
+		{axis:"AI", value: Math.sqrt(+d.scoreAI/100.0)},
         // {axis:"Biocomputation", value: d.scoreBiocomp},
-        {axis:"Computer Engineering", value: +d.scoreCompeng/100.0},
-        // {axis:"Graphics", value: d.scoreGraphics},
-        // {axis:"HCI", value: d.scoreHCI},
-        {axis:"Info", value: +d.scoreInfo/100.0},
-        {axis:"Systems", value: +d.scoreSystems/100.0},
-        {axis:"Theory", value: +d.scoreTheory/100.0},
+        {axis:"Computer Engineering", value: Math.sqrt(+d.scoreCompeng/100.0)},
+        {axis:"Info", value: Math.sqrt(+d.scoreInfo/100.0)},
+        {axis:"Systems", value: Math.sqrt(+d.scoreSystems/100.0)},
+        {axis:"Theory", value: Math.sqrt(+d.scoreTheory/100.0)},
+        {axis:"HCI", value: Math.sqrt(+d.scoreHCI/100.0)},
+        {axis:"Graphics", value: Math.sqrt(+d.scoreGraphics/100.0)},
     ];
 }
 
@@ -130,17 +130,18 @@ var classSearchElem = document.getElementById('classSearch');
 classSearchElem.addEventListener("keydown", onClassSearchEnter);
 
 var originalStyle;
+
 function highlightClass(classIdx) {
     // console.log(classIdx);
     let elem = document.getElementById(classIdx);
     // console.log(elem);
-    originalStyle = elem.style.border;
-    elem.style.border = "thick solid black";
+    originalStyle = elem.style.opacity;
+    elem.style.opacity = 1.0;
 }
 
 function unhighlightClass(classIdx) {
     let elem = document.getElementById(classIdx);
-    elem.style.border = originalStyle;
+    elem.style.opacity = originalStyle;
 }
 
 function addClassWidget(classIdx) {
@@ -157,8 +158,8 @@ function addClassWidget(classIdx) {
     // let newBGColor = oldBGColor.replace('rgb','rgba').replace(')', ','+0.5+')');
     // console.log(newBGColor);
     // c.style.backgroundColor = newBGColor;
-    //c.addEventListener('mouseover', mouseoverClassWidget);
-    //c.addEventListener('mouseout', mouseoutClassWidget);
+    c.addEventListener('mouseover', mouseoverClassWidget);
+    c.addEventListener('mouseout', mouseoutClassWidget);
     elem.appendChild(c);
 }
 

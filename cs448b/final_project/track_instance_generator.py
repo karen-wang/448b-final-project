@@ -8,6 +8,7 @@ from numpy import linalg
 import scipy as sp
 from scipy import spatial
 import csv
+import pandas as pd
 
 NUM_INSTANCES = 10000
 OR_DELIM = '-or-'
@@ -49,6 +50,23 @@ def generate_AI_track_instances(d):
 
     #pprint(counter)
     return counter
+
+def generate_biocomp_track_instances(d):
+    counter = Counter()
+    for _ in range(NUM_INSTANCES):
+        track_instance = []
+        # A
+        a_courses = d['biocomp.a']
+        b_courses = d['biocomp.b']
+        track_instance.append(random.choice(a_courses))
+        # B
+        track_instance.append(random.choice(b_courses))
+        # C
+        c_courses = list(set(a_courses + b_courses + d['biocomp.c']) - set(track_instance))
+        track_instance.append(random.choice(c_courses))
+
+        # TODO finish this
+
 
 def generate_compeng_track_instances(d):
     counter = Counter()
@@ -173,6 +191,7 @@ def generate_graphics_track_instances(d):
 def load_data():
     global all_courses
     all_courses = []
+    all_courses_tmp = []
     dict = {}
     buckets = json.load(open('requirements.json'))
     for bucket in buckets:
@@ -181,10 +200,15 @@ def load_data():
             return
         courses = [x.encode('utf-8') for x in bucket["courses"]]
         dict[bucket["name"].encode('utf-8')] = courses
-        all_courses += courses
+        all_courses_tmp += courses
         if "quantity" in bucket:
             dict[bucket["name"]+".quantity"] = bucket["quantity"]
-    all_courses = sorted(list(set(all_courses)))
+        all_courses_tmp = sorted(list(set(all_courses_tmp)))
+
+    for course in all_courses_tmp:
+        if OR_DELIM not in course:
+            all_courses.append(course)
+
     # pprint(all_courses)
     return dict, all_courses
 
@@ -197,9 +221,8 @@ def get_scores_for_course(course):
     #normalized_appearances = [round(x/float(sum(appearances)+.0001),3) for x in appearances]        
     normalized_appearances = [round(100*x/float(NUM_INSTANCES),3) for x in appearances]
     # print {course: appearances}
-    print {course: normalized_appearances}
-    return {"name": course,
-            "count": normalized_appearances}
+    #print {course: normalized_appearances}
+    return {"name": course, "count": normalized_appearances}
 
 
 # Note: all vectors have sum and length.
@@ -302,9 +325,20 @@ def writeHeatmapTSV(tracks):
 
     print sorted(values)
 
+def get_course_title_and_description(course_info, deptCode, classNo):
+    course_id = (deptCode + " " + classNo).upper()
+    row = course_info[course_info.id == course_id]
+    title = row.iloc[0][1]
+    description = row.iloc[0][2]
+    return title, description
+
+
 def main():
     global all_sampled_tracks
     dict, all_courses = load_data()
+    #loads the course info into pandas data frame
+    course_info = pd.read_csv('parsed_cs_reqs.csv')
+    
     c1 = generate_AI_track_instances(dict)
     ai2 = generate_AI_track_instances(dict)
     c2 = generate_compeng_track_instances(dict)
@@ -347,8 +381,8 @@ def main():
     # dists = get_all_track_distances(classes_by_track)
     # print_dists_sorted(dists)
 
-    # outputCSV()
+    outputCSV()
 
-    writeHeatmapTSV(classes_by_track)
+    #writeHeatmapTSV(classes_by_track)
 
 main()
