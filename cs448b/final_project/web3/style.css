@@ -5,13 +5,41 @@
 body {
     
     margin: 2em;
-    font-family: "Helvetica Neue", Helvetica;
+    font-family: 'Barlow Semi Condensed', "Helvetica Neue", Helvetica;
 }
 
 h1 {
     font-size: 48px;
 }
 
+#heatmap-info {
+	width: 400px;
+	height: 500px;
+	border-style: black; 
+	border-width: 2px; 
+	text-align: center; 
+	background-color: lightblue;
+	border-radius: 5px;
+}
+
+#track-track-ctr {
+	padding-left: 100px;
+}
+
+.description-text {
+	font-weight: 700;
+}
+
+.track-text {
+	font-weight: 400;
+}
+
+.track-track-header {
+	margin-top: 15px;
+	padding-top: 20px;
+	font-size: 170%;
+	margin-bottom: 20px;
+}
 /*#chart {
     position: absolute;
     top: 50px;
