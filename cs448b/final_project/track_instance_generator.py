@@ -13,7 +13,7 @@ import pandas as pd
 NUM_INSTANCES = 10000
 OR_DELIM = '-or-'
 
-tracknames = ["AI", "compeng", "info", "theory", "systems", "HCI", "graphics"]
+tracknames = ["AI", "compeng", "info", "theory", "systems", "HCI", "graphics"].sort()
 
 def generate_AI_track_instances(d):
     counter = Counter()
@@ -306,20 +306,24 @@ def outputJSON():
 
 def writeHeatmapTSV(tracks):
 
-    tracknames = tracks.keys()    
-    
+    tracknames = sorted(tracks.keys())
+    print tracknames
 
+    values = []
     with open("./web3/track-track.tsv", "w") as heatmap_file:
         heatmap_file.write("track1\ttrack2\tsimilarity\n")
         for i in range(len(tracknames)):
             for j in range(i, len(tracknames)):
                 t1 = tracknames[i]
                 t2 = tracknames[j]
+                values.append(get_track_distance(tracks[t1], tracks[t2]))
                 heatmap_file.write('%d\t%d\t%.4f\n' % (i+1, j+1, get_track_distance(tracks[t1], tracks[t2])))
                 heatmap_file.write('%d\t%d\t%.4f\n' % (j+1, i+1, get_track_distance(tracks[t1], tracks[t2])))
                 #dist_dict[t1+ ' and ' +t2] = get_track_distance(tracks[t1], tracks[t2])
+                print t1, t2, get_track_distance(tracks[t1], tracks[t2])
         heatmap_file.close()
 
+    print sorted(values)
 
 def get_course_title_and_description(course_info, deptCode, classNo):
     course_id = (deptCode + " " + classNo).upper()
@@ -399,8 +403,8 @@ def main():
     # dists = get_all_track_distances(classes_by_track)
     # print_dists_sorted(dists)
 
-    outputCSV()
+    #outputCSV()
 
-    #writeHeatmapTSV(classes_by_track)
+    writeHeatmapTSV(classes_by_track)
 
 # main()
