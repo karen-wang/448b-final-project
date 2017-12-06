@@ -16,8 +16,8 @@ body {
 }
 
 rect.bordered {
-    stroke: #E6E6E6;
-    stroke-width:2px;   
+    stroke: white;
+    stroke-width:2.5px;   
   }
 
   text.mono {
