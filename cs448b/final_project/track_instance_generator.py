@@ -10,7 +10,7 @@ from scipy import spatial
 import csv
 import pandas as pd
 
-NUM_INSTANCES = 10000
+NUM_INSTANCES = 1000
 OR_DELIM = '-or-'
 
 tracknames = ["AI", "compeng", "info", "theory", "systems", "HCI", "graphics"].sort()
@@ -299,7 +299,7 @@ def outputJSON():
         output = get_scores_for_course(course)
         # pprint(output)
         data.append(output)
-    # pprint(data)
+    pprint(data)
 
     with open('out.json', 'w') as outfile:
         json.dump(data, outfile)
@@ -383,9 +383,10 @@ def output_course_info():
                 writer.writerow([course, title, desc])
 
 
-output_course_info()
+#output_course_info()
 
 def main():
+    print 'running'
     global all_sampled_tracks
     dict, all_courses = load_data()
     
@@ -414,14 +415,17 @@ def main():
     all_sampled_tracks["hci"] = c6
     all_sampled_tracks["graphics"] = c7
 
-   
+    print c1['stats 202']
     get_common_classes(all_sampled_tracks)
-    # data = []
-    # for course in all_courses:
-    #     output = get_scores_for_course(course)
-    #     pprint(output)
-    #     data.append(output)
-    # pprint(data)
+
+    data = []
+    for course in all_courses:
+        output = get_scores_for_course(course)
+       
+        pprint(output)
+        data.append(output)
+    pprint(data)
+
     return
     classes_by_track = {}
     classes_by_track["ai"] = convert_track_to_vector(c1, all_courses)
@@ -439,4 +443,4 @@ def main():
 
     writeHeatmapTSV(classes_by_track)
 
-# main()
+main()
