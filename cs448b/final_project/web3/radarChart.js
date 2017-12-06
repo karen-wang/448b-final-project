@@ -114,6 +114,7 @@ var RadarChart = {
 		//if (!cfg.classIndices.includes(x)) return;
 		//console.log(y);
 	  dataValues = [];
+
 	  g.selectAll(".nodes")
 		.data(y, function(j, i){
 			  //console.log(j, i);
@@ -140,6 +141,7 @@ var RadarChart = {
 					 .style("fill", function(j, i){return cfg.color(x)})
 					 .style("fill-opacity", cfg.opacityArea)
 					 .on('mouseover', function (d){
+
 										z = "polygon."+d3.select(this).attr("class");
 										g.selectAll("polygon")
 										 .transition(200)
@@ -148,13 +150,15 @@ var RadarChart = {
 										 .transition(200)
 										 .style("fill-opacity", 1.0);
 										//highlightClass(x);
+
 									  })
 					 .on('mouseout', function(){
 										g.selectAll("polygon")
 										 .transition(200)
 										 .style("fill-opacity", cfg.opacityArea);
                          //unhighlightClass(x);
-					 });
+					 })
+					 ;
 	  series++;
 	});
 	series=0;

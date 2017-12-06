@@ -1,9 +1,9 @@
 var margin = { top: 30, right: 0, bottom: 100, left: 100 },
           width = 750 - margin.left - margin.right,
-          height = 680 - margin.top - margin.bottom,
+          height = 630 - margin.top - margin.bottom,
           legendspace = 0,
           gridSize = Math.floor(width / 10), //switch basd on num tracks
-          legendElementWidth = .8*gridSize,
+          legendElementWidth = .9*gridSize,
           buckets = 10,
           colors = colorbrewer.Purples[buckets-1],//["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"], // alternatively colorbrewer.YlGnBu[9]
           tracks = ["AI", "CompEng", "Info", "Theory", "Systems", "Graphics", "HCI"].sort(),
@@ -72,18 +72,18 @@ var margin = { top: 30, right: 0, bottom: 100, left: 100 },
               .style("fill", "white")
               .on('mouseover', function(c) {
                 
-                d3.select('#track1-name').text('Track 1: ' + full_tracknames[c.hour-1])
-                d3.select('#track2-name').text('Track 2: ' + full_tracknames[c.day-1])
-                d3.select('#similarity').text('Similarity: ' + c.value)
+                d3.select('#track1-name').text(full_tracknames[c.hour-1])
+                d3.select('#track2-name').text(full_tracknames[c.day-1])
+                d3.select('#similarity').text(c.value)
                 trackstr = c.hour.toString() + c.day.toString();
                 d3.select('#track1-common').text(common_classes_for_track[trackstr]);
                 d3.select(this).style({"stroke": "green", "stroke-width": "2px"});
               })
               .on('mouseout', function(c) {
                 d3.select(this).style({"stroke": "white", "stroke-width": "2px"});
-                d3.select('#track1-name').text("Track 1: ")
-                d3.select('#track2-name').text("Track 2: ")
-                d3.select('#similarity').text('Similarity: ')
+                d3.select('#track1-name').text("")
+                d3.select('#track2-name').text("")
+                d3.select('#similarity').text("")
                 d3.select('#track1-common').text('')
               });
 
@@ -110,8 +110,10 @@ var margin = { top: 30, right: 0, bottom: 100, left: 100 },
           legend.enter().append("g")
               .attr("class", "legend");
 
+          var LEGEND_SHIFT = 40;
+
           legend.append("rect")
-            .attr("x", function(d, i) { return legendElementWidth * i; })
+            .attr("x", function(d, i) { return legendElementWidth * i-LEGEND_SHIFT; })
             .attr("y", height+legendspace)
             .attr("width", legendElementWidth)
             .attr("height", gridSize / 2)
@@ -121,9 +123,9 @@ var margin = { top: 30, right: 0, bottom: 100, left: 100 },
             .attr("class", "mono")
             .text(function(d) { 
               console.log(d)
-              return "≥ " + Math.round(10*d)/10.0; 
+              return "≥ " + Math.round(100*Math.pow(d, 1))/100.0; 
             })
-            .attr("x", function(d, i) { return legendElementWidth * i; })
+            .attr("x", function(d, i) { return legendElementWidth * i-LEGEND_SHIFT; })
             .attr("y", height + gridSize);
 
           legend.exit().remove();

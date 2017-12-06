@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
       <link rel="stylesheet" href="style.css">
+      <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed:400,700" rel="stylesheet"> 
   <title>Radar chart</title>
     <script src="http://d3js.org/d3.v3.min.js"></script>
 	  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -51,18 +52,20 @@
 
 	</div>
 
-  <div class="row">
+  <div class="row track-track-ctr">
     <div class="col-sm-4">
-      <span id="heatmap-info">
-        <div style="width: 500px; height: 500px; stroke: black; stroke-width: 2px; text-align: center">
-          <div>Track Information</div>
-          <div style="text-align: left; margin-left: 100px;">
+      <span >
+        <div style="margin-left: 50px; width: 400px; height: 500px; border-style: black; border-width: 2px; text-align: center; background-color: lightblue">
+          <div class="track-track-header">Track Information</div>
+          <div style="text-align: left; margin-left: 50px;">
 
-            <div id="track1-name">Track 1: </div>
-            <div id="track2-name">Track 2: </div>
-            <div id="similarity">Similarity: </div>
-            <div>Most Common Classes in Both: </div>
-            <div id="track1-common"></div>
+            <div class="description-text"> Track 1: <span class="track-text" id="track1-name"></span></div>
+            <div class="description-text">Track 2: <span class="track-text" id="track2-name"></span></div>
+             <div class="description-text">Similarity: <span class="track-text" id="similarity"></span></div>
+            <div class="description-text">
+              <div class="description-text">Most Common Classes in Both: </div>
+              <span class="track-text" id="track1-common"></span>
+            </div>
 
           </div>
         </div>
