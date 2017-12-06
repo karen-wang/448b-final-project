@@ -37,6 +37,36 @@ var dataToDisplay = [];
 // Load data from CSV
 d3.csv('data.csv', parseInputRow, loadData);
 
+// Load data from CSV
+d3.csv('course_info.csv', parseInputRowCourseInfo, loadDataCourseInfo);
+
+function parseInputRowCourseInfo(d) {
+    //console.log(d);
+    return {
+        courseKey: d.courseKey,
+        title: d.title,
+        desc : d.description,
+    };
+}
+
+var allCourseInfo = {};
+
+function loadDataCourseInfo(error, data) {
+    if (error) {
+        console.log(error);
+        throw error; // Runs if there's a problem fetching the csv.
+    }
+
+    //console.log(data);
+    data.forEach(function(dataPoint) {
+        allCourseInfo[dataPoint.courseKey] = {
+            title: dataPoint.title,
+            desc: dataPoint.desc,
+        }
+    });
+
+}
+
 function parseInputRow(d) {
     let courseName = d.deptCode + ' ' + d.classNo;
     orderedClasses.push(courseName);
@@ -121,13 +151,37 @@ function loadData(error, data) {
                 //     var index = $( "#selectable li" ).index( this );
                 //     result.append( " #" + ( index + 1 ) );
                 // });
+                $( ".ui-selected", this ).each(function() {
+                    displayClassInfo(this);
+                });
             }
         });
     } );
 }
 
+function displayClassInfo(elem) {
+    //console.log(elem);
+    let courseKey = elem.innerHTML;
+    console.log(courseKey);
+
+    let currClassKeyElem = document.getElementById('currClassKey');
+    currClassKey.innerHTML = courseKey.toUpperCase();
+    let currClassElem = document.getElementById('currClass');
+    let currClassInfoElem = document.getElementById('currClassInfo');
+    if (courseKey in allCourseInfo) {
+        let courseObj = allCourseInfo[courseKey];
+        currClassElem.innerHTML = courseObj.title;
+        currClassInfoElem.innerHTML = courseObj.desc;
+    } else {
+        currClassElem.innerHTML = '<em>Course info unavailable</em>';
+        currClassInfoElem.innerHTML = '';
+    }
+
+}
+
 var classSearchElem = document.getElementById('classSearch');
 classSearchElem.addEventListener("keydown", onClassSearchEnter);
+
 
 var originalStyle;
 
@@ -150,6 +204,8 @@ function addClassWidget(classIdx) {
     c.id = classIdx;
     c.className = 'ui-widget-content';
     c.innerHTML = orderedClasses[classIdx];
+
+    //c.innerHTML += '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>';
     c.style.backgroundColor = colorscale(selectedClassIndices.indexOf(classIdx));
     c.style.opacity = 0.7;
     c.style.color = 'white'; // hack
@@ -160,6 +216,9 @@ function addClassWidget(classIdx) {
     // c.style.backgroundColor = newBGColor;
     c.addEventListener('mouseover', mouseoverClassWidget);
     c.addEventListener('mouseout', mouseoutClassWidget);
+    // let s = document.createElement('span');
+    // s.className = 'glyphicon glyphicon-remove';
+    // elem.appendChild(s);
     elem.appendChild(c);
 }
 
