@@ -18,7 +18,6 @@ var RadarChart = {
 	 ExtraWidthX: 100,
 	 ExtraWidthY: 100,
 	 color: d3.scale.category10(),
-	  classIdx: 0,
 	};
 
 	if('undefined' !== typeof options){

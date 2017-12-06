@@ -57,13 +57,16 @@ h1 {
     margin-bottom: 20px;
 }
 
-#col1 {
-    width: 200px;
+.remove-btn {
+    float: right;
 }
 
-.column {
-    float: left;
-    margin: 2%;
+.btn-default {
+    font-size: 20px;
+}
+
+.ui-widget-content {
+    min-width: 150px;
 }
 
 #classSearch {
