@@ -10,7 +10,10 @@ var margin = { top: 30, right: 0, bottom: 100, left: 100 },
           full_tracknames = ["Artificial Intelligence", "Computer Engineering", "Information", "Theory", "Systems", "Graphics", "Human Computer Interaction"].sort()
           //times = ["1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a", "12a", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p", "12p"];
           datasets = ["track-track.tsv"];
-
+          // colors.push(colors[8]);
+          // colors.push(colors[8]);
+          // colors = colors.splice(2);
+          
       //should be good
       var heatmap = d3.select("#heatmap").append("svg")
           .attr("width", width + margin.left + margin.right)
@@ -52,7 +55,7 @@ var margin = { top: 30, right: 0, bottom: 100, left: 100 },
         },
         function(error, data) {
           var colorScale = d3.scale.quantile()
-              .domain([0, d3.max(data, function (d) { return d.value; })])
+              .domain([0, 1])
               .range(colors);
 
           var cards = heatmap.selectAll(".hour")
@@ -95,8 +98,8 @@ var margin = { top: 30, right: 0, bottom: 100, left: 100 },
                   console.log(tracks[d.day-1], tracks[d.hour-1], Math.pow(d.value, .6))
                   return colorScale(Math.pow(d.value, .5)); 
                 } else {
-                  console.log(tracks[d.day-1], tracks[d.hour-1], d.value)
-                  return colorScale(d.value); 
+                  console.log(tracks[d.day-1], tracks[d.hour-1], d.value*2.5)
+                  return colorScale(d.value*1.7); 
                 }
               });
 
@@ -123,7 +126,7 @@ var margin = { top: 30, right: 0, bottom: 100, left: 100 },
             .attr("class", "mono")
             .text(function(d) { 
               console.log(d)
-              return "≥ " + Math.round(100*Math.pow(d, 1))/100.0; 
+              return "≥ " + Math.round(10000*Math.pow(d, 1)/170.0)/100.0; 
             })
             .attr("x", function(d, i) { return legendElementWidth * i-LEGEND_SHIFT; })
             .attr("y", height + gridSize);

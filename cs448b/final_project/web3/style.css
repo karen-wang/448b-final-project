@@ -24,6 +24,9 @@ h1 {
 
 #track-track-ctr {
 	padding-left: 100px;
+	text-align: center;
+	margin: auto;
+	margin-left: 400px;
 }
 
 .description-text {
