@@ -44,6 +44,11 @@ h1 {
     width: 90%;
 }
 
+#submitBtn {
+    width: 90%;
+    font-size: 20px;
+}
+
 #heatmap {
 	margin-bottom: 10;
 }
