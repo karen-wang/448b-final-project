@@ -13,7 +13,8 @@ import pandas as pd
 NUM_INSTANCES = 10000
 OR_DELIM = '-or-'
 
-tracknames = ["AI", "compeng", "info", "theory", "systems", "HCI", "graphics"].sort()
+# tracknames = ["AI", "compeng", "info", "theory", "systems", "HCI", "graphics"].sort()
+tracknames = ["ai", "compeng", "info", "theory", "systems", "hci", "graphics"]
 
 def generate_AI_track_instances(d):
     counter = Counter()
@@ -37,7 +38,7 @@ def generate_AI_track_instances(d):
         track_instance.append(random.choice(c_courses))
 
         # Elective requirements
-        electives = list(set(d["general_cs_electives"] + c_courses)
+        electives = list(set(d["general_cs_electives"] + c_courses + d['ai.track_electives'])
                          - set(track_instance))
         courses = random.sample(electives, 3)
         for course in courses:
@@ -284,12 +285,12 @@ def outputCSV():
             dept_code = dept_code_class_no[0]
             class_no = dept_code_class_no[1]
             track_scores = output['count']
-            score_ai = track_scores[tracknames.index('AI')]
+            score_ai = track_scores[tracknames.index('ai')]
             score_compeng = track_scores[tracknames.index('compeng')]
             score_info = track_scores[tracknames.index('info')]
             score_systems = track_scores[tracknames.index('systems')]
             score_theory = track_scores[tracknames.index('theory')]
-            score_hci = track_scores[tracknames.index('HCI')]
+            score_hci = track_scores[tracknames.index('hci')]
             score_graphics = track_scores[tracknames.index('graphics')]
             writer.writerow([dept_code, class_no, score_ai, score_compeng, score_info, score_systems, score_theory, score_hci, score_graphics])
 
@@ -383,7 +384,7 @@ def output_course_info():
                 writer.writerow([course, title, desc])
 
 
-output_course_info()
+# output_course_info()
 
 def main():
     global all_sampled_tracks
@@ -414,15 +415,19 @@ def main():
     all_sampled_tracks["hci"] = c6
     all_sampled_tracks["graphics"] = c7
 
+    outputCSV()
+
+    return
+
    
-    get_common_classes(all_sampled_tracks)
+    #get_common_classes(all_sampled_tracks)
     # data = []
     # for course in all_courses:
     #     output = get_scores_for_course(course)
     #     pprint(output)
     #     data.append(output)
     # pprint(data)
-    return
+    #return
     classes_by_track = {}
     classes_by_track["ai"] = convert_track_to_vector(c1, all_courses)
     classes_by_track["compeng"] = convert_track_to_vector(c2, all_courses)
@@ -435,8 +440,6 @@ def main():
     # dists = get_all_track_distances(classes_by_track)
     # print_dists_sorted(dists)
 
-    #outputCSV()
+    #writeHeatmapTSV(classes_by_track)
 
-    writeHeatmapTSV(classes_by_track)
-
-# main()
+main()
