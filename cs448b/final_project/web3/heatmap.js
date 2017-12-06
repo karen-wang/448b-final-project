@@ -1,6 +1,6 @@
-var margin = { top: 50, right: 0, bottom: 100, left: 200 },
-          width = 960 - margin.left - margin.right,
-          height = 700 - margin.top - margin.bottom,
+var margin = { top: 50, right: 0, bottom: 100, left: 500 },
+          width = 1200 - margin.left - margin.right,
+          height = 720 - margin.top - margin.bottom,
           legendspace = 0,
           gridSize = Math.floor(width / 10), //switch basd on num tracks
           legendElementWidth = .8*gridSize,

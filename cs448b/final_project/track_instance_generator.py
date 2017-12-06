@@ -381,8 +381,8 @@ def main():
     # dists = get_all_track_distances(classes_by_track)
     # print_dists_sorted(dists)
 
-    outputCSV()
+    #outputCSV()
 
-    #writeHeatmapTSV(classes_by_track)
+    writeHeatmapTSV(classes_by_track)
 
 main()
