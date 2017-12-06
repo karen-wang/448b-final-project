@@ -118,8 +118,8 @@ var RadarChart = {
 		.data(y, function(j, i){
 			  //console.log(j, i);
 		  dataValues.push([
-			cfg.w/2*(1-(parseFloat(Math.max(j.value, 0))/cfg.maxValue)*cfg.factor*Math.sin(i*cfg.radians/total)),
-			cfg.h/2*(1-(parseFloat(Math.max(j.value, 0))/cfg.maxValue)*cfg.factor*Math.cos(i*cfg.radians/total))
+			cfg.w/2*(1-(parseFloat(Math.max(j.value, 0.01))/cfg.maxValue)*cfg.factor*Math.sin(i*cfg.radians/total)),
+			cfg.h/2*(1-(parseFloat(Math.max(j.value, 0.01))/cfg.maxValue)*cfg.factor*Math.cos(i*cfg.radians/total))
 		  ]);
 		});
 	  dataValues.push(dataValues[0]);
@@ -170,16 +170,16 @@ var RadarChart = {
 		.append("svg:circle")
 		.attr("class", "radar-chart-serie"+x)
 		.attr('r', cfg.radius)
-		.attr("alt", function(j){return Math.max(j.value, 0)})
+		.attr("alt", function(j){return Math.max(j.value, 0.01)})
 		.attr("cx", function(j, i){
 		  dataValues.push([
-			cfg.w/2*(1-(parseFloat(Math.max(j.value, 0))/cfg.maxValue)*cfg.factor*Math.sin(i*cfg.radians/total)),
-			cfg.h/2*(1-(parseFloat(Math.max(j.value, 0))/cfg.maxValue)*cfg.factor*Math.cos(i*cfg.radians/total))
+			cfg.w/2*(1-(parseFloat(Math.max(j.value, 0.01))/cfg.maxValue)*cfg.factor*Math.sin(i*cfg.radians/total)),
+			cfg.h/2*(1-(parseFloat(Math.max(j.value, 0.01))/cfg.maxValue)*cfg.factor*Math.cos(i*cfg.radians/total))
 		]);
-		return cfg.w/2*(1-(Math.max(j.value, 0)/cfg.maxValue)*cfg.factor*Math.sin(i*cfg.radians/total));
+		return cfg.w/2*(1-(Math.max(j.value, 0.01)/cfg.maxValue)*cfg.factor*Math.sin(i*cfg.radians/total));
 		})
 		.attr("cy", function(j, i){
-		  return cfg.h/2*(1-(Math.max(j.value, 0)/cfg.maxValue)*cfg.factor*Math.cos(i*cfg.radians/total));
+		  return cfg.h/2*(1-(Math.max(j.value, 0.01)/cfg.maxValue)*cfg.factor*Math.cos(i*cfg.radians/total));
 		})
 		.attr("data-id", function(j){return j.axis})
 		.style("fill", cfg.color(x)).style("fill-opacity", .9)
