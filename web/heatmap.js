@@ -77,7 +77,7 @@ var margin = { top: 30, right: 0, bottom: 100, left: 100 },
                 
                 d3.select('#track1-name').text(full_tracknames[c.hour-1])
                 d3.select('#track2-name').text(full_tracknames[c.day-1])
-                d3.select('#similarity').text(c.value)
+                d3.select('#similarity').text(c.value + ' / 1.000')
                 trackstr = c.hour.toString() + c.day.toString();
                 d3.select('#track1-common').text(common_classes_for_track[trackstr]);
                 d3.select(this).style({"stroke": "green", "stroke-width": "2px"});

@@ -10,6 +10,12 @@ body {
 
 h1 {
     font-size: 48px;
+    text-align: center;
+}
+
+#title {
+    font-size: 60px;
+    font-weight: 700;
 }
 
 #heatmap-info {
@@ -37,17 +43,18 @@ h1 {
 	font-weight: 400;
 }
 
+
+
 .track-track-header {
 	margin-top: 15px;
 	padding-top: 20px;
 	font-size: 170%;
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 }
-/*#chart {
-    position: absolute;
-    top: 50px;
-    left: 250px;
-}*/
+#chart {
+    margin-top: 20px;
+    margin-left: 70px;
+}
 
 /* Clear floats after the columns */
 .row:after {
