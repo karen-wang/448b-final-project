@@ -152,10 +152,16 @@ function addClassWidget(className) {
     updateClassWidgetColors();
 }
 
+
+var feedbackElem = document.getElementById('feedback');
+var MAX_CLASSES = 10;
+
 function clickRemoveButton(event) {
     //console.log(event);
 
     //console.log(selectedClassIndices);
+
+    feedbackElem.innerHTML = '';
 
     if (dataToDisplay.length > 1) {
         let parentElem = event.target.parentNode;
@@ -174,16 +180,25 @@ function clickRemoveButton(event) {
 
         console.log(displayedClasses);
     }
+    else {
+        feedbackElem.innerHTML = 'You have to display at least 1 class.';
+    }
 }
 
 function onClassSearchEnter(e) {
     if (e.keyCode === 13) {  //checks whether the pressed key is "Enter"
         //console.log(e);
 
+        feedbackElem.innerHTML = '';
+
         let selectedClass = e.target.value;
         let classIdx = orderedClasses.indexOf(selectedClass);
         // TODO add feedback for these
-        if (classIdx < 0 || displayedClasses.includes(selectedClass) || displayedClasses.length >= 10) {
+        if (classIdx < 0 || displayedClasses.includes(selectedClass)) {
+            return;
+        }
+        if (displayedClasses.length >= MAX_CLASSES) {
+            feedbackElem.innerHTML = "Sorry, you can't display more than " + MAX_CLASSES + " classes.";
             return;
         }
         displayedClasses.push(selectedClass);

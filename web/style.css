@@ -78,6 +78,10 @@ h1 {
     width: 90%;
 }
 
+#feedback {
+    font-style: italic;
+}
+
 #submitBtn {
     width: 90%;
     font-size: 20px;
