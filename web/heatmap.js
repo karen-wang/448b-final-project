@@ -3,8 +3,8 @@ var margin = { top: 30, right: 0, bottom: 100, left: 100 },
           height = 630 - margin.top - margin.bottom,
           legendspace = 0,
           gridSize = Math.floor(width / 10), //switch basd on num tracks
-          legendElementWidth = .9*gridSize,
-          buckets = 10,
+          legendElementWidth = 1.1*gridSize,
+          buckets = 6,
           colors = colorbrewer.Purples[buckets-1],//["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"], // alternatively colorbrewer.YlGnBu[9]
           tracks = ["AI", "CompEng", "Info", "Theory", "Systems", "Graphics", "HCI"].sort(),
           full_tracknames = ["Artificial Intelligence", "Computer Engineering", "Information", "Theory", "Systems", "Graphics", "Human Computer Interaction"].sort()
@@ -113,7 +113,7 @@ var margin = { top: 30, right: 0, bottom: 100, left: 100 },
           legend.enter().append("g")
               .attr("class", "legend");
 
-          var LEGEND_SHIFT = 40;
+          var LEGEND_SHIFT = -60;
 
           legend.append("rect")
             .attr("x", function(d, i) { return legendElementWidth * i-LEGEND_SHIFT; })
